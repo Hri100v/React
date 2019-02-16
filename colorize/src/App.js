@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { CONSTRES } from './components/AlbumsList';
 
 class App extends Component {
   status = (response) => {
@@ -14,52 +15,84 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const albumsArray = fetch("https://jsonplaceholder.typicode.com/photos", { albumId: 1 })
+    console.log('constructor', CONSTRES);
+    
+    this.state = {
+      albums: [],
+      representativeAlbums: []
+    }
+  }
+
+  componentDidMount() {
+    fetch("https://jsonplaceholder.typicode.com/photos")
       .then(this.status)
-      .then(response => {
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
-        console.log(1001, data);
-        // let result = `<h2> Random User Info From Jsonplaceholder API</h2>`;
-        // data.forEach((album) => {
-        //   const { id, albumId } = album;
-        //   if (albumId < 6) {
-        //     console.log(album, id);
-        //   }          
-        // });
+        const firstFiveAlbums = [];
+        // console.log(1001, data.slice(0, 5), 'This is BETTER option', data);        
+        const representFirstFiveAlbums = [];
+        let currentAlbumID = -1;
+        if (!!firstFiveAlbums) {
+          data.forEach(element => {
+            if (element.albumId <= 5) {
+              if (element.albumId != currentAlbumID) {                
+                currentAlbumID = element.albumId;
+                representFirstFiveAlbums.push(element);
+              }
+
+              if (element.id == 1) {
+                console.log(element);                
+              }
+
+              firstFiveAlbums.push(element);
+            }
+          });
+        }
+
+        console.log(representFirstFiveAlbums);
+
+        this.setState({
+          albums: firstFiveAlbums,
+          representativeAlbums: representFirstFiveAlbums
+        });
       })
       .catch(reason => {
         console.error(reason);
       });
-
-    this.state = {
-      albums: []
-    }
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+        <header height={400} className="App-header">
+          <img src={logo} style={{ weight: 100, height: 100 }} className="App-logo" alt="logo" />         
         </header>
         <main>
-          <div id={"root"} />
+          <div id={"root"}>
+            1234....
+            {/* <ul>
+              {
+                this.state.representativeAlbums.map((album, i) => {
+                  return <AlbumList {...album} />;
+                })
+              }
+            </ul> */}
+          </div>
+          <div id={"albumsPreview"}>
+              {/* <AlbumList {...this.state.representativeAlbums} /> */}
+          </div>
         </main>
+        <footer>
+          <div className={"left-side"}>
+            © Colorize 2019
+          </div>
+          <div className={"right-side"}>
+              <div>Home</div>
+              <div>About</div>
+          </div>          
+        </footer>
       </div>
-    );
+    )
   }
 }
 
