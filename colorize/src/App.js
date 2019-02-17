@@ -66,18 +66,24 @@ class App extends Component {
     return (
       <div className="App">
         <header height={400} className="App-header">
-          <img src={logo} style={{ weight: 100, height: 100 }} className="App-logo" alt="logo" />
+          {/* <img src={logo} className="App-logo" alt="logo" /> */}
+          <nav>
+            <a href={"/"}>Home</a>
+            <a href={"/"}>About</a>
+          </nav>
         </header>
         <main>
           <AlbumsList resource={this.state.representativeAlbums} />
         </main>
         <footer>
           <div className={"left-side"}>
-            © Colorize 2019
+            <div>
+              © Colorize 2019
+            </div>
           </div>
           <div className={"right-side"}>
-            <div>Home</div>
-            <div>About</div>
+            <div><a href={"/"}>Home</a></div>
+            <div><a href={"/"}>About</a></div>
           </div>
         </footer>
       </div>

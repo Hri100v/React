@@ -2,9 +2,10 @@
   text-align: center;
 }
 
+/* Header */
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+  height: 10vmin;
   pointer-events: none;
 }
 
@@ -13,14 +14,41 @@
   /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-header img {
+  width: 100px;
+  height: 100px;
+}
+
+nav {
+  /* position: relative; */
+  /* display: inline-flex; */
+  /* left: 100px;
+  top: -50px; */
+  /* justify-content: left;
+  flex-direction: row;
+  text-align: left; */
+  align-content: left;
+  /* vertical-align: middle; */
+  /* min-height: 4.5em; */
+}
+
+nav a {
+  color: white;
+  /* #61dafb; */
+  text-decoration: none;
+  /* align-content: center;
+  vertical-align: middle; */
+  /* margin-left: 35px; */
+}
+
+nav a:last-child {
+  margin-left: 35px;
 }
 
 @keyframes App-logo-spin {
@@ -39,21 +67,34 @@ main {
 }
 
 picture {
-  margin: 4px;
+  margin: 10px;
+  position: relative;
 }
 
-/* picture > img:hover {
-  border-bottom: 8px;
-  border-color: #282c34;
-} */
-/* 
-.albums-list {
-  border: 1px dash red;
-} */
+.albums-list picture p {
+  opacity: 0;
+  display: inline;
+  position: absolute;
+  bottom: 5px;
+  left: 0px;
+  right: 0px;
+  margin: 0;
+  text-align: center;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  font-size: 0.8em;
+}
 
-/* picture > img:hover {
-  border-bottom: 8px solid black;
-} */
+.albums-list picture:hover p {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: mistyrose;
+}
+
+.albums-list picture p span { 
+  font-size: 140%;
+  font-weight: bold;
+}
 
 /* Footer */
 footer {
@@ -61,17 +102,24 @@ footer {
   width: 100%;
   bottom: 0;
   position: fixed;
-  min-height: 0.1vmax;
+  line-height: 1.8em;
 }
 
 footer div {
   color: mistyrose;
   font-size: 12px;
+  vertical-align: middle;
+}
+
+footer div a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .left-side {
   float: left;
   background-color: inherit;
+  padding-left: 10px;
 }
 
 .right-side {

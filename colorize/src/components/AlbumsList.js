@@ -5,7 +5,7 @@ export const AlbumsList = (props) => {
     {props.resource.map((album, i) => {
       return <picture key={i}>
         <img src={album.thumbnailUrl} alt={`album: ${album.albumId}`} width={"auto"} />
-        <p>{album.title}</p>
+        <p>Album #{album.albumId}: <span>{(album.title).slice(0, 5)}</span></p>
       </picture>;
     })}
   </div>
