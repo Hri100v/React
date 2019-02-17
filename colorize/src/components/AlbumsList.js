@@ -1,20 +1,12 @@
 import React from 'react'
-// import Todo from './Todo'
 
-export const AlbumsList = ({ albums }) => (
-  <ul>
-    {albums.map(album => (
-      <li key={album.id}>
-        <img src={album.thumbnailUrl} alt={""} />
+export const AlbumsList = (props) => {
+  return <div className={"albums-list"}>
+    {props.resource.map((album, i) => {
+      return <picture key={i}>
+        <img src={album.thumbnailUrl} alt={`album: ${album.albumId}`} width={"auto"} />
         <p>{album.title}</p>
-      </li>
-    ))}
-  </ul>
-)
-
-export const CONSTRES = {
-    a: 'foo',
-    b: 'bar'
-}
-
-// export default AlbumsList
+      </picture>;
+    })}
+  </div>
+};

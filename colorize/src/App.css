@@ -32,14 +32,42 @@
   }
 }
 
-/* footer {
-  padding: 10px;
-  background-color: #282c34;
+/* Main */
+main {
+  margin: 10px 0 10px 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+picture {
+  margin: 4px;
+}
+
+/* picture > img:hover {
+  border-bottom: 8px;
+  border-color: #282c34;
+} */
+/* 
+.albums-list {
+  border: 1px dash red;
+} */
+
+/* picture > img:hover {
+  border-bottom: 8px solid black;
+} */
+
+/* Footer */
+footer {
+  background-color: #333;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+  min-height: 0.1vmax;
 }
 
 footer div {
-  display: inline-block;
-} */
+  color: mistyrose;
+  font-size: 12px;
+}
 
 .left-side {
   float: left;
