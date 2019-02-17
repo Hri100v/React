@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { AlbumsList } from './components/AlbumsList';
+import { Album } from './components/Album';
+
+import { BrowserRouter, Route } from 'react-router-dom';
+
+const NewRoute = () => {
+  return <div>
+    <p>Test New Route</p>
+  </div>;
+};
 
 class App extends Component {
   status = (response) => {
@@ -14,8 +23,6 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-
-    console.log('constructor');
 
     this.state = {
       albums: [],
@@ -30,7 +37,6 @@ class App extends Component {
       .then(data => {
         const firstFiveAlbums = [];
         const representFirstFiveAlbums = [];
-        // console.log(1001, data.slice(0, 5), 'This is BETTER option', data);        
         let currentAlbumID = -1;
         if (!!firstFiveAlbums) {
           data.forEach(element => {
@@ -50,7 +56,7 @@ class App extends Component {
           });
         }
 
-        console.log(representFirstFiveAlbums);
+        console.log(representFirstFiveAlbums, firstFiveAlbums);
 
         this.setState({
           albums: firstFiveAlbums,
@@ -66,13 +72,30 @@ class App extends Component {
     return (
       <div className="App">
         <header height={400} className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
+          <img src={logo} className="App-logo" alt="logo" />
           <nav>
-            <a href={"/"}>Home</a>
-            <a href={"/"}>About</a>
+            <ul>
+              <li><a href={"/"}>Home</a></li>
+              <li><a href={"/"}>About</a></li>
+            </ul>
           </nav>
         </header>
         <main>
+          <BrowserRouter>
+            <Route path={"/album/1"} render={() => {
+              // TODO: Create services to get data for particular 'album'
+              let albumItems = [];
+
+              for (const item of this.state.albums) {
+                if (item.albumId === 1) {
+                  albumItems.push(item);
+                }
+                console.log(item);
+              }
+              return <Album resource={albumItems} />
+            }} />
+          </BrowserRouter>
+
           <AlbumsList resource={this.state.representativeAlbums} />
         </main>
         <footer>

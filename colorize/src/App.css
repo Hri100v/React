@@ -18,6 +18,7 @@
   justify-content: left;
   font-size: calc(10px + 2vmin);
   color: white;
+  position: relative;
 }
 
 .App-header img {
@@ -26,29 +27,32 @@
 }
 
 nav {
-  /* position: relative; */
-  /* display: inline-flex; */
-  /* left: 100px;
-  top: -50px; */
-  /* justify-content: left;
-  flex-direction: row;
-  text-align: left; */
-  align-content: left;
-  /* vertical-align: middle; */
-  /* min-height: 4.5em; */
+  min-height: 40px;
+  text-align: left;
+  position: absolute;
+  top: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav li {
+  display: inline-block;
 }
 
 nav a {
-  color: white;
-  /* #61dafb; */
+  color: #61dafb;
   text-decoration: none;
-  /* align-content: center;
-  vertical-align: middle; */
-  /* margin-left: 35px; */
 }
 
-nav a:last-child {
-  margin-left: 35px;
+nav a:hover {
+  opacity: 0.5;
+}
+
+nav li:first-child {
+  margin-left: 75px;
+  margin-right: 35px;
 }
 
 @keyframes App-logo-spin {
@@ -64,6 +68,18 @@ nav a:last-child {
 main {
   margin: 10px 0 10px 0;
   font-family: 'Courier New', Courier, monospace;
+}
+
+.album-content {
+  overflow: hidden;
+}
+
+.album-content h4, .album-content p {
+  margin: 0;
+}
+
+.album-content img {
+  padding-bottom: 10px;
 }
 
 picture {
