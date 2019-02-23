@@ -1,13 +1,30 @@
 import React from 'react';
 
+// Create Segment
+// Import Segment
+
+// Create Snake
+// Import Snake
+
+// Create PlayGround
+// Import PlayGround
+
+import { Snake } from './snake';
+
 export class GameSnake extends React.PureComponent {
-    constructor() {
-        super();
+    constructor(...args) {
+        super(...args);
+
+        // console.log('GameSnake', GameSnake, this);
+        
     }
 
     render() {
         return <div>
-            <h2>Snake Position</h2>
+            <h2>Loading Snake Position</h2>
+            <Snake width={120}>
+                Snake Heart
+            </Snake>
         </div>;
     }
 }
