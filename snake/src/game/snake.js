@@ -36,8 +36,8 @@ export class Snake extends React.PureComponent {
     render() {
         return <div>
             <h2>The Snake</h2>
-            <Segment>first</Segment>
-            <Segment>second</Segment>
+            <Segment color={"greenyellow"}>first</Segment>
+            <Segment color={"greenyellow"}>second</Segment>
         </div>;
     }
  

@@ -10,17 +10,18 @@ import React from 'react';
 // Import PlayGround
 
 import { Snake } from './snake';
+import { PlayGround } from './playground';
 
 export class GameSnake extends React.PureComponent {
     constructor(...args) {
         super(...args);
 
         // console.log('GameSnake', GameSnake, this);
-        
+
     }
 
     moving(event) {
-        console.log(event);        
+        console.log(event);
     }
 
     clicked() {
@@ -30,9 +31,11 @@ export class GameSnake extends React.PureComponent {
     render() {
         return <div>
             <h2>Loading Snake Position</h2>
-            <Snake width={120} onClick={this.clicked} onKeyPress={this.moving}>
-                Snake Heart
-            </Snake>
+            <PlayGround columns={5} rows={5}>
+                <Snake width={120} onClick={this.clicked} onKeyPress={this.moving}>
+                    Snake Heart
+                </Snake>
+            </PlayGround>
         </div>;
     }
 }
