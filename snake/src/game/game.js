@@ -19,10 +19,18 @@ export class GameSnake extends React.PureComponent {
         
     }
 
+    moving(event) {
+        console.log(event);        
+    }
+
+    clicked() {
+        console.log('clicked');
+    }
+
     render() {
         return <div>
             <h2>Loading Snake Position</h2>
-            <Snake width={120}>
+            <Snake width={120} onClick={this.clicked} onKeyPress={this.moving}>
                 Snake Heart
             </Snake>
         </div>;
