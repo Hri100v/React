@@ -9,12 +9,13 @@
 import React from 'react';
 import { Segment } from './segment'
 
+export const MyContext = React.createContext();
+
 export class PlayGround extends React.PureComponent {
     boardReference = React.createRef();
 
     constructor(props) {
         super(props);
-        console.log(1001, props);
 
         this.state = {
             board: this.createBoard(props.rows, props.columns),
@@ -64,9 +65,27 @@ export class PlayGround extends React.PureComponent {
         // this.update()
     }
 
-    getSegment(x, y) {
+    getCell(x, y) {
         const boardGrid = this.state.board;
         return boardGrid[x][y];
+    }
+
+    randomSize(size) {
+        let number = Math.floor(Math.random() * size);
+        return number;
+    }
+
+    getRandomCell() {
+        let rX = 0;
+    }
+
+    validationCell(cell) {
+        // avoid boundary = 1; free = 0
+        if (cell == 0) {
+            return true;
+        }
+
+        return false;
     }
 
     draw() {
@@ -106,12 +125,51 @@ export class PlayGround extends React.PureComponent {
 
     update() {
         console.log("Update Board!");
+        // Re-draw the board
     }
 
+    doSomething = (value) => {
+        // Do something here with value
+        console.log("It is in the Parent!", value);
+    };
+
     render() {
+        const { children } = this.props;
+        const childrenWithProps = React.Children.map(children, child => {
+            // child.props.transfer = "Test Transfer!";
+            // console.log(child, this, children)
+
+            return React.cloneElement(child, {
+                playGround: this,
+                board: this.state.board
+            });
+            // React.cloneElement(child, { transfer: { foo: 1234, bar: 43221 } })
+        });
+        console.log(1001, children);
+        console.log("randomSize", this.randomSize(this.state.cols));
+        
+
+
+        // setTimeout(() => {
+        //     console.log("setTimeout", this.getCell(1, 1));            
+        // }, 2000);
+
         return <div className={"board"}>
             <h1>Board</h1>
-            {this.props.children}
+
+            MyContext work!
+            {/* <MyContext.Provider value={{ doSomething: this.doSomething }}>
+                {this.props.children}
+            </MyContext.Provider> */}
+            <br />
+
+            Another try:
+            {childrenWithProps}
+
+            <br />
+
+            Classic approach:
+            {/* {this.props.children} */}
 
             <div ref={this.boardReference}>
                 create board here - with adding segments
