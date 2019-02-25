@@ -30,7 +30,7 @@ export class GameSnake extends React.PureComponent {
 
 
     moving(event) {
-        console.log(event);
+        console.log(event, 4444);
     }
 
     clicked() {
@@ -41,7 +41,7 @@ export class GameSnake extends React.PureComponent {
         return <div>
             <h1>{this.state.testText}</h1>
             <h2>Loading Snake Position</h2>
-            <PlayGround ref={this.board} columns={15} rows={15}>
+            <PlayGround ref={this.board} columns={20} rows={20}>
                 <Snake ref={this.snake}
                     // parent={this.state.board}
                     width={120}

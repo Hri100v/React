@@ -16,20 +16,15 @@ export class Snake extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        // console.log(1221, props);
+        console.log(1221, props, this.props.initState.coordinates);
 
         this.state = {
             // parent: props.parent,
-            segments: [
-                // Head
-                {
-                    prev: null,
-                    coordinates: { x: 0, y: 0 },
-                    next: null
-                }
-            ],
+            // Head - first item in the array
+            segments: this.props.initState,
             color: "greenyellow",
-            text: "initial state"
+            text: "initial state",
+            direction: "none"
         };
 
         this.onClick = this.onClick.bind(this);
@@ -57,10 +52,56 @@ export class Snake extends React.PureComponent {
             if (this.directions[event.key]) {
                 console.log(this.directions[event.key]);
                 this.move(this.directions[event.key]);
+
             }
         });
+
+        console.log('componentDidMount', this.state);
+
     }
 
+    moveUp(grid, shape) {
+        // direction up
+        shape[0].coordinates.x = shape[0].coordinates.x;
+        shape[0].coordinates.y = shape[0].coordinates.y - 1;
+        return shape;
+    }
+
+    // Look ok
+    moveBody(shape, i, prevCoor) {
+        let coordinates = shape[i].coordinates;
+        shape[i].coordinates = prevCoor;
+        let next = shape[i].next;
+        if (next !== null) {
+            this.moveBody(shape, next, coordinates);
+        } else {
+            return shape;
+        }
+    }
+
+    // Work on that way
+    moveDown(shape, i) {
+        let coordinates = Object.assign({}, shape[i].coordinates);
+        shape[i].coordinates.x = shape[i].coordinates.x;
+        shape[i].coordinates.y = shape[i].coordinates.y + 1;
+        let next = shape[i].next;
+        if (next !== null) {
+            this.moveBody(shape, shape[i].next, coordinates);
+        }
+        return shape;
+    }
+
+    moveLeft(shape, i) {
+        shape[i].coordinates.x = shape[i].coordinates.x - 1;
+        shape[i].coordinates.y = shape[i].coordinates.y;
+        return shape;
+    }
+
+    moveRight(shape) {
+        shape[0].coordinates.x = shape[0].coordinates.x + 1;
+        shape[0].coordinates.y = shape[0].coordinates.y;
+        return shape;
+    }
 
     move(direction) {
         // Move the head only
@@ -70,25 +111,15 @@ export class Snake extends React.PureComponent {
             case "up":
                 // moving it up
                 console.log("UP");
-                this.setState((previousState, currentProps) => {
-                    console.log("this.setState", previousState, currentProps)
-                    let x = previousState.segments[0].coordinates.x;
-                    let y = previousState.segments[0].coordinates.y;
-                    return {
-                        segments: [
-                            {
-                                parent: null,
-                                coordinates: { x: x + 1, y: y + 1 }
-                            }
-                        ]
-                    }
-                });
-                // setTimeout(() => {
-                //     console.log(this.state, 6543);
-                // }, 1000);
+                this.moveUp(this.testGrid);
                 break;
             case "down":
                 // moving it down
+                if (this.state.direction !== direction) {
+                    let positionDown = this.moveDown(this.state.segments, 0);
+                    console.log(positionDown);                    
+                }
+
                 break;
             case "left":
                 // moving it left
@@ -126,4 +157,9 @@ export class Snake extends React.PureComponent {
 
         // this.context.doSomething(this.props.value);
     };
+
+    onMoving(event) {
+        console.log("moving");
+        return "Moving Snake";
+    }
 }

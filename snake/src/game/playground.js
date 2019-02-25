@@ -14,6 +14,7 @@ export const MyContext = React.createContext();
 
 export class PlayGround extends React.PureComponent {
     boardReference = React.createRef();
+    updatedBoard = null;
 
     constructor(props) {
         super(props);
@@ -22,7 +23,24 @@ export class PlayGround extends React.PureComponent {
             board: this.createBoard(props.rows, props.columns),
             cols: props.columns,
             rows: props.rows,
-            // drawedBoard: this.draw()
+            snake: [
+                {
+                    prev: null,
+                    coordinates: { x: (props.columns / 2 | 1), y: (props.rows / 2 | 1) },
+                    // next: 1
+                    next: null
+                },
+                // {
+                //     prev: 0,
+                //     coordinates: { x: (props.columns / 2 | 1) + 1, y: (props.rows / 2 | 1) },
+                //     next: 2
+                // },
+                // {
+                //     prev: 1,
+                //     coordinates: { x: (props.columns / 2 | 1) + 2, y: (props.rows / 2 | 1) },
+                //     next: null
+                // }
+            ]
         };
     }
 
@@ -62,9 +80,12 @@ export class PlayGround extends React.PureComponent {
 
         setTimeout(() => {
             // update - add food
-            this.update();
-            // let rCell = this.getRandomCellWithCoordinates(5, 5);            
-            // console.log(rCell, this.validationCell(rCell));
+            let foodCell = this.addFood();
+            let col = foodCell.x;
+            let row = foodCell.y;
+            let newBoard = this.deepCopyOfBoard(this.state.board);
+            newBoard[row][col] = foodCell.value;
+            this.update(newBoard);
         }, 2000);
     }
 
@@ -150,11 +171,11 @@ export class PlayGround extends React.PureComponent {
         // const parent = this.boardReference.current.parent();
         let boardContent = this.boardReference.current;
         let boardChildren = boardContent.children
-        console.log(this.boardReference.current, boardChildren.length);
+        // console.log(this.boardReference.current, boardChildren.length);
 
-        let ll = 0;
+        // let ll = 0;
         if (boardChildren.length !== 0) {
-            console.log("Has children", boardChildren);
+            // console.log("Has children", boardChildren);
             ReactDOM.unmountComponentAtNode(this.boardReference.current)
 
             // for (const child of boardChildren) {
@@ -192,45 +213,23 @@ export class PlayGround extends React.PureComponent {
         return foodPlace;
     }
 
-    update() {
-        console.log("Update Board!");
-        // Re-draw the board
-        let foodCell = this.addFood();
-        console.log(foodCell);
-        let col = foodCell.x;
-        let row = foodCell.y;
-        // let newBoard = Object.assign({}, this.state.board); //this.state.board.slice(0);
-        // newBoard[row][col] = foodCell.value;
-        let ar = this.state.board.map(rs => {
+    deepCopyOfBoard(originalArray) {
+        let arrayCopy = originalArray.map(rs => {
             return rs.map(c => {
                 return c;
             });
         });
-        ar[row][col] = foodCell.value;
-        // console.log(ar, this.state.board);
+        return arrayCopy;
+    }
+
+    update(newBoard) {
+        console.log("Update Board!");
+        // Re-draw the board
         this.setState({
-            board: ar
+            board: newBoard
         });
 
-
-        // console.log(this.state.board, newBoard);
         this.draw();
-
-        // console.log("state before", this.state.board);
-
-        // this.setState(state => {
-        //     let newBoard = state.board;
-        //     // newBoard
-        //     return {
-        //         board: newBoard,
-        //         cols: state.columns,
-        //         rows: state.rows
-        //     }
-        // });
-
-        // setTimeout(() => {
-        //     console.log("state after", this.state.board);
-        // }, 1111);
     }
 
     doSomething = (value) => {
@@ -240,11 +239,17 @@ export class PlayGround extends React.PureComponent {
 
     render() {
         const { children } = this.props;
+        // console.log(this.props);
+
         const childrenWithProps = React.Children.map(children, child => {
+            // console.log(child);
+
             return React.cloneElement(child, {
                 playGround: this,
-                board: this.state.board
-            });
+                board: this.state.board,
+                initState: this.state.snake,
+                onMoving: this.onMoving
+            },);
         });
 
         return <div className={"board"}>
@@ -273,5 +278,9 @@ export class PlayGround extends React.PureComponent {
                 create board here - with adding segments
             </div>
         </div>;
+    }
+
+    onMoving(event) {
+        console.log(event);
     }
 }
