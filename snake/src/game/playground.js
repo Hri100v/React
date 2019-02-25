@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Segment } from './segment'
 
 export const MyContext = React.createContext();
@@ -20,14 +21,14 @@ export class PlayGround extends React.PureComponent {
         this.state = {
             board: this.createBoard(props.rows, props.columns),
             cols: props.columns,
-            rows: props.rows
+            rows: props.rows,
+            // drawedBoard: this.draw()
         };
     }
 
     createBoard(rows, cols) {
         const board = [];
         // Determinate boundary - first and last row/col
-        let boundary = 1;
         for (let r = 0; r < rows; r++) {
             // const row = rows[r];
             const row = [];
@@ -56,13 +57,15 @@ export class PlayGround extends React.PureComponent {
     // randomly generated "food"
 
     componentDidMount() {
-        // initial state
-        // update
-        //yconsole.log(this.state.board, 2222);
-
+        // Board - initial state
         this.draw();
 
-        // this.update()
+        setTimeout(() => {
+            // update - add food
+            this.update();
+            // let rCell = this.getRandomCellWithCoordinates(5, 5);            
+            // console.log(rCell, this.validationCell(rCell));
+        }, 2000);
     }
 
     getCell(x, y) {
@@ -75,13 +78,20 @@ export class PlayGround extends React.PureComponent {
         return number;
     }
 
-    getRandomCell() {
-        let rX = 0;
+    getRandomCellWithCoordinates(cols, rows) {
+        let rX = this.randomSize(cols);
+        let rY = this.randomSize(rows);
+        let cellValue = this.getCell(rX, rY);
+        return {
+            x: rX,
+            y: rY,
+            value: cellValue
+        };
     }
 
     validationCell(cell) {
         // avoid boundary = 1; free = 0
-        if (cell == 0) {
+        if (cell.value === 0) {
             return true;
         }
 
@@ -89,43 +99,138 @@ export class PlayGround extends React.PureComponent {
     }
 
     draw() {
+        console.log("--drawing--");
+
+        let segments = [];
         for (const row of this.state.board) {
             // console.log(2002, row);
             for (const col of row) {
                 // console.log(2332, col);
-                if (col === 1) {
-                    // boundery
-                }
-
                 switch (col) {
                     case 1:
                         // boundary
-
+                        const boundary = <Segment color={"gray"} />;
+                        segments.push(boundary);
                         break;
                     case 2:
                         // snake
-
+                        const snake = <Segment color={"green"} />;
+                        segments.push(snake);
                         break;
                     case 3:
                         // food
+                        const food = <Segment color={"red"} />;
+                        segments.push(food);
+                        console.log("food");
 
                         break;
                     case 4:
                         // obstacle
-
+                        const obstacle = <Segment color={"darkgray"} />;
+                        segments.push(obstacle);
                         break;
 
                     default:
                         // free space
+                        const free = <Segment color={"mistyrose"} />;
+                        segments.push(free);
                         break;
                 }
             }
         }
+
+        let loop = 0;
+        const boardSegments = React.Children.map(segments, segment => {
+            return React.cloneElement(segment, {
+                key: loop++
+            });
+        });
+
+        // this.boardReference.current.innerHTML = '';
+        // const parent = this.boardReference.current.parent();
+        let boardContent = this.boardReference.current;
+        let boardChildren = boardContent.children
+        console.log(this.boardReference.current, boardChildren.length);
+
+        let ll = 0;
+        if (boardChildren.length !== 0) {
+            console.log("Has children", boardChildren);
+            ReactDOM.unmountComponentAtNode(this.boardReference.current)
+
+            // for (const child of boardChildren) {
+            //     if (ll < 10) {
+            //         console.log(child, boardContent);
+            //         boardContent.removeChild(child);
+            //     }
+            //     ll++;
+            // }
+        }
+
+        ReactDOM.render(
+            boardSegments,
+            this.boardReference.current
+        );
+
+        return segments;
+    }
+
+    addFood() {
+        let isValid = true;
+        let foodPlace = null;
+        const colsSize = this.state.cols;
+        const rowsSize = this.state.rows;
+        do {
+            let randomCell = this.getRandomCellWithCoordinates(colsSize, rowsSize);
+            // console.log(randomCell, this.validationCell(randomCell));
+            if (this.validationCell(randomCell)) {
+                isValid = false;
+                foodPlace = randomCell;
+                foodPlace.value = 3;
+            }
+        } while (isValid);
+
+        return foodPlace;
     }
 
     update() {
         console.log("Update Board!");
         // Re-draw the board
+        let foodCell = this.addFood();
+        console.log(foodCell);
+        let col = foodCell.x;
+        let row = foodCell.y;
+        // let newBoard = Object.assign({}, this.state.board); //this.state.board.slice(0);
+        // newBoard[row][col] = foodCell.value;
+        let ar = this.state.board.map(rs => {
+            return rs.map(c => {
+                return c;
+            });
+        });
+        ar[row][col] = foodCell.value;
+        // console.log(ar, this.state.board);
+        this.setState({
+            board: ar
+        });
+
+
+        // console.log(this.state.board, newBoard);
+        this.draw();
+
+        // console.log("state before", this.state.board);
+
+        // this.setState(state => {
+        //     let newBoard = state.board;
+        //     // newBoard
+        //     return {
+        //         board: newBoard,
+        //         cols: state.columns,
+        //         rows: state.rows
+        //     }
+        // });
+
+        // setTimeout(() => {
+        //     console.log("state after", this.state.board);
+        // }, 1111);
     }
 
     doSomething = (value) => {
@@ -136,23 +241,11 @@ export class PlayGround extends React.PureComponent {
     render() {
         const { children } = this.props;
         const childrenWithProps = React.Children.map(children, child => {
-            // child.props.transfer = "Test Transfer!";
-            // console.log(child, this, children)
-
             return React.cloneElement(child, {
                 playGround: this,
                 board: this.state.board
             });
-            // React.cloneElement(child, { transfer: { foo: 1234, bar: 43221 } })
         });
-        console.log(1001, children);
-        console.log("randomSize", this.randomSize(this.state.cols));
-        
-
-
-        // setTimeout(() => {
-        //     console.log("setTimeout", this.getCell(1, 1));            
-        // }, 2000);
 
         return <div className={"board"}>
             <h1>Board</h1>
@@ -171,7 +264,12 @@ export class PlayGround extends React.PureComponent {
             Classic approach:
             {/* {this.props.children} */}
 
-            <div ref={this.boardReference}>
+            <div ref={this.boardReference}
+                style={{
+                    width: (this.state.cols * 10),
+                    lineHeight: 0
+                }}
+            >
                 create board here - with adding segments
             </div>
         </div>;

@@ -28,7 +28,8 @@ export class Snake extends React.PureComponent {
                     next: null
                 }
             ],
-            color: "greenyellow"
+            color: "greenyellow",
+            text: "initial state"
         };
 
         this.onClick = this.onClick.bind(this);
@@ -43,40 +44,21 @@ export class Snake extends React.PureComponent {
 
     render() {
         return <div onClick={this.onClick}>
-            
+
             <h2>The Snake</h2>
-            <Segment color={this.state.color}>first</Segment>
-            <Segment color={"green"}>second</Segment>
+            <p>{this.state.text}</p>
+            <Segment color={this.state.color} margin={1}>first</Segment>
+            <Segment color={"green"} margin={1}>second</Segment>
         </div>;
     }
 
-    // pressedKey = null;
     componentDidMount() {
         document.addEventListener("keydown", event => {
-            // console.log("-Snake- catch key pressings", event);
             if (this.directions[event.key]) {
                 console.log(this.directions[event.key]);
                 this.move(this.directions[event.key]);
-
-                // setTimeout(() => {
-                //     console.log(this.state, 6543);
-                // }, 1000);
             }
         });
-
-        // console.log("componentDidMount", this, this.state.parent.current);
-
-        // if (this.state.parent.current !== null) {
-        //     const board = this.state.parent.current;
-        //     console.log("Yes!");
-        //     console.log(typeof board);
-        // }
-
-        // if (this.state.parent) {
-        //     // const board = this.state.parent.current;
-        //     // const cell = board.getCell(0, 0);
-        //     console.log(this.state.parent);            
-        // }
     }
 
 
@@ -84,7 +66,6 @@ export class Snake extends React.PureComponent {
         // Move the head only
         // after that move its sibling on its position
         // continue to the next
-
         switch (direction) {
             case "up":
                 // moving it up
@@ -102,12 +83,9 @@ export class Snake extends React.PureComponent {
                         ]
                     }
                 });
-
-                setTimeout(() => {
-                    console.log(this.state, 6543);
-                }, 1000);
-
-
+                // setTimeout(() => {
+                //     console.log(this.state, 6543);
+                // }, 1000);
                 break;
             case "down":
                 // moving it down
@@ -124,27 +102,28 @@ export class Snake extends React.PureComponent {
         }
     }
 
-    // Think about grow (with animation)
+    // Think about grow (with/without animation)
     grow() { }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log(8998, prevProps, prevState);
-        
+        // console.log(8998, prevProps, prevState);
+        console.log(8998);
     }
 
     // Way to pass data to the Parent
     onClick = () => {
         console.log("Snake class - clicking");
         console.log(this.state);
-        
+
         this.setState({
-            color: "green"
+            color: "green",
+            text: "update state"
         });
 
-            // color1: "green",
-            // color2: "yellowgreen",
-            // color3: "red"
-            
+        // color1: "green",
+        // color2: "yellowgreen",
+        // color3: "red"
+
         // this.context.doSomething(this.props.value);
     };
 }

@@ -8,14 +8,12 @@ import { MyContext } from './playground';
 export class Segment extends React.PureComponent {
     static contextType = MyContext;
 
-    // constructor(...args) {
     constructor(props) {
         super(props);
-        // console.log(...args);
 
-        // console.log(1234, props);
         this.state = {
-            bodyColor: !!props.color ? props.color : "mistyrose"
+            bodyColor: !!props.color ? props.color : "mistyrose",
+            margin: !!props.margin ? props.margin : 0
         }
     }
 
@@ -23,13 +21,10 @@ export class Segment extends React.PureComponent {
 
     render() {
         const size = 10;
-        //const bodyColor = "red" | "greenyellow"; // to change it later
-        // console.log("render", this.state.bodyColor);
-
         return <div className={"snake-segment"}
             // onClick={this.onClick}
             style={{
-                margin: 1,
+                margin: this.state.margin,
                 width: size,
                 height: size,
                 backgroundColor: this.state.bodyColor,
