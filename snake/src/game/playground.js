@@ -70,10 +70,13 @@ export class PlayGround extends React.PureComponent {
         return board;
     }
 
+    onSnakeMove = (event) => {
+        console.log("onSnakeMove = (event) => {}", event);
+    }
+
     // boundary
     // randomly generated obstacles
     // randomly generated "food"
-
     componentDidMount() {
         // Board - initial state
         this.draw();
@@ -248,8 +251,8 @@ export class PlayGround extends React.PureComponent {
                 playGround: this,
                 board: this.state.board,
                 initState: this.state.snake,
-                onMoving: this.onMoving
-            },);
+                onMoving: this.onSnakeMove
+            });
         });
 
         return <div className={"board"}>

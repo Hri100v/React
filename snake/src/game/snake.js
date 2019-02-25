@@ -117,7 +117,7 @@ export class Snake extends React.PureComponent {
                 // moving it down
                 if (this.state.direction !== direction) {
                     let positionDown = this.moveDown(this.state.segments, 0);
-                    console.log(positionDown);                    
+                    console.log(positionDown);
                 }
 
                 break;
@@ -133,12 +133,17 @@ export class Snake extends React.PureComponent {
         }
     }
 
+    someFn = () => {
+        this.props.onMoving({ info: "DataInfo Object!" })
+    }
+
     // Think about grow (with/without animation)
     grow() { }
 
     componentDidUpdate(prevProps, prevState) {
         // console.log(8998, prevProps, prevState);
         console.log(8998);
+        this.someFn();
     }
 
     // Way to pass data to the Parent
@@ -157,9 +162,4 @@ export class Snake extends React.PureComponent {
 
         // this.context.doSomething(this.props.value);
     };
-
-    onMoving(event) {
-        console.log("moving");
-        return "Moving Snake";
-    }
 }
