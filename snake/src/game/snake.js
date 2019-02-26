@@ -16,7 +16,7 @@ export class Snake extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        console.log(1221, props, this.props.initState.coordinates);
+        // console.log(1221, props, this.props.initState.coordinates);
 
         this.state = {
             // parent: props.parent,
@@ -30,6 +30,7 @@ export class Snake extends React.PureComponent {
         this.onClick = this.onClick.bind(this);
     }
 
+    // TODO: Clear if do not use
     directions = {
         ArrowUp: "up",
         ArrowDown: "down",
@@ -50,7 +51,7 @@ export class Snake extends React.PureComponent {
     componentDidMount() {
         document.addEventListener("keydown", event => {
             if (this.directions[event.key]) {
-                console.log(this.directions[event.key]);
+                // console.log(this.directions[event.key]);
                 this.move(this.directions[event.key]);
 
             }
@@ -58,13 +59,6 @@ export class Snake extends React.PureComponent {
 
         console.log('componentDidMount', this.state);
 
-    }
-
-    moveUp(grid, shape) {
-        // direction up
-        shape[0].coordinates.x = shape[0].coordinates.x;
-        shape[0].coordinates.y = shape[0].coordinates.y - 1;
-        return shape;
     }
 
     // Look ok
@@ -77,6 +71,17 @@ export class Snake extends React.PureComponent {
         } else {
             return shape;
         }
+    }
+
+    moveUp(shape, i) {
+        let coordinates = Object.assign({}, shape[i].coordinates);
+        shape[i].coordinates.x = shape[i].coordinates.x;
+        shape[i].coordinates.y = shape[i].coordinates.y - 1;
+        let next = shape[i].next;
+        if (next !== null) {
+            this.moveBody(shape, shape[i].next, coordinates);
+        }
+        return shape;
     }
 
     // Work on that way
@@ -92,14 +97,24 @@ export class Snake extends React.PureComponent {
     }
 
     moveLeft(shape, i) {
+        let coordinates = Object.assign({}, shape[i].coordinates);
         shape[i].coordinates.x = shape[i].coordinates.x - 1;
         shape[i].coordinates.y = shape[i].coordinates.y;
+        let next = shape[i].next;
+        if (next !== null) {
+            this.moveBody(shape, shape[i].next, coordinates);
+        }
         return shape;
     }
 
-    moveRight(shape) {
-        shape[0].coordinates.x = shape[0].coordinates.x + 1;
-        shape[0].coordinates.y = shape[0].coordinates.y;
+    moveRight(shape, i) {
+        let coordinates = Object.assign({}, shape[i].coordinates);
+        shape[i].coordinates.x = shape[i].coordinates.x + 1;
+        shape[i].coordinates.y = shape[i].coordinates.y;
+        let next = shape[i].next;
+        if (next !== null) {
+            this.moveBody(shape, shape[i].next, coordinates);
+        }
         return shape;
     }
 
@@ -107,34 +122,61 @@ export class Snake extends React.PureComponent {
         // Move the head only
         // after that move its sibling on its position
         // continue to the next
+
+        
         switch (direction) {
             case "up":
                 // moving it up
-                console.log("UP");
-                this.moveUp(this.testGrid);
+                // console.log("UP");
+                // this.moveUp(this.testGrid);
+                if (this.state.direction !== direction) {
+                    let positionSnake = this.moveUp(this.state.segments, 0);
+                    // console.log(positionSnake);
+                    // console.log(positionSnake[0].coordinates);
+                    this.setState({ direction: direction, segments: positionSnake });
+                }
+
                 break;
             case "down":
                 // moving it down
-                if (this.state.direction !== direction) {
-                    let positionDown = this.moveDown(this.state.segments, 0);
-                    console.log(positionDown);
-                }
+                // if (this.state.direction !== direction) {
+                    let positionSnake2 = this.moveDown(this.state.segments, 0);
+                    // console.log(positionSnake);
+                    // console.log(positionSnake[0].coordinates);
+                    // this.setState({ segments: positionSnake });
+                    this.setState({ direction: direction, segments: positionSnake2 });
+                // }
 
                 break;
             case "left":
                 // moving it left
+                // if (this.state.direction !== direction) {
+                    let positionSnake3 = this.moveLeft(this.state.segments, 0);
+                    // console.log(positionSnake);
+                    // console.log(positionSnake[0].coordinates);
+                    // this.setState({ segments: positionSnake });
+                    this.setState({ direction: direction, segments: positionSnake3 });
+                // }
                 break;
             case "right":
                 // moving it right
+                // if (this.state.direction !== direction) {
+                    let positionSnake4 = this.moveRight(this.state.segments, 0);
+                    // console.log(positionSnake);
+                    // console.log(positionSnake[0].coordinates);
+                    // this.setState(state => {return { segments: positionSnake }});
+                    this.setState({ direction: direction, segments: positionSnake4 });
+                // }
                 break;
 
             default:
                 break;
         }
+        this.refreshMove();
     }
 
-    someFn = () => {
-        this.props.onMoving({ info: "DataInfo Object!" })
+    refreshMove() {
+        this.props.onMoving({ direction: this.state.direction, segments: this.state.segments })
     }
 
     // Think about grow (with/without animation)
@@ -143,18 +185,19 @@ export class Snake extends React.PureComponent {
     componentDidUpdate(prevProps, prevState) {
         // console.log(8998, prevProps, prevState);
         console.log(8998);
-        this.someFn();
+        // debugger;
+        // this.refreshMove();
     }
 
     // Way to pass data to the Parent
-    onClick = () => {
+    onClick() {
         console.log("Snake class - clicking");
         console.log(this.state);
 
-        this.setState({
-            color: "green",
-            text: "update state"
-        });
+        // this.setState({
+        //     color: "green",
+        //     text: "update state"
+        // });
 
         // color1: "green",
         // color2: "yellowgreen",

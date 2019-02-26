@@ -71,13 +71,34 @@ export class PlayGround extends React.PureComponent {
     }
 
     onSnakeMove = (event) => {
-        console.log("onSnakeMove = (event) => {}", event);
+        console.log("onSnakeMove");
+        this.clear();        
+        let newBoard = this.deepCopyOfBoard(this.state.board);
+        let segments = event.segments;
+        
+        // snake segment is 2
+        for (const segment of segments) {
+            let coordinates = segment.coordinates
+            newBoard[coordinates.y][coordinates.x] = 2;            
+        }
+        this.update(newBoard)
     }
 
     // boundary
     // randomly generated obstacles
     // randomly generated "food"
     componentDidMount() {
+        this.setState(state => {
+            let updateOnBoard = state.board;
+            let snakePosition = state.snake[0].coordinates;
+            updateOnBoard[snakePosition.y][snakePosition.x] = 2;
+            // console.log(2002, state.board);            
+
+            return {
+                board: updateOnBoard
+            }
+        });
+
         // Board - initial state
         this.draw();
 
@@ -113,6 +134,7 @@ export class PlayGround extends React.PureComponent {
         };
     }
 
+    // TODO: Check for food under the snake
     validationCell(cell) {
         // avoid boundary = 1; free = 0
         if (cell.value === 0) {
@@ -123,8 +145,7 @@ export class PlayGround extends React.PureComponent {
     }
 
     draw() {
-        console.log("--drawing--");
-
+        // console.log("--drawing--");
         let segments = [];
         for (const row of this.state.board) {
             // console.log(2002, row);
@@ -145,8 +166,7 @@ export class PlayGround extends React.PureComponent {
                         // food
                         const food = <Segment color={"red"} />;
                         segments.push(food);
-                        console.log("food");
-
+                        // console.log("food");
                         break;
                     case 4:
                         // obstacle
@@ -225,6 +245,21 @@ export class PlayGround extends React.PureComponent {
         return arrayCopy;
     }
 
+    clear() {
+        let clearBoard = this.deepCopyOfBoard(this.state.board);
+        for (let i = 0; i < clearBoard.length; i++) {
+            const row = clearBoard[i];
+            for (let k = 0; k < row.length; k++) {
+                const cell = row[k];
+                if (cell === 2) {
+                    clearBoard[i][k] = 0;
+                }
+            }
+        }
+
+        this.setState({ board: clearBoard });
+    }
+
     update(newBoard) {
         console.log("Update Board!");
         // Re-draw the board
@@ -235,10 +270,10 @@ export class PlayGround extends React.PureComponent {
         this.draw();
     }
 
-    doSomething = (value) => {
-        // Do something here with value
-        console.log("It is in the Parent!", value);
-    };
+    // doSomething = (value) => {
+    //     // Do something here with value
+    //     console.log("It is in the Parent!", value);
+    // };
 
     render() {
         const { children } = this.props;
@@ -284,6 +319,14 @@ export class PlayGround extends React.PureComponent {
     }
 
     onMoving(event) {
-        console.log(event);
+        console.log(4334);
+        
+        // let newBoard = this.deepCopyOfBoard(this.state.board);
+        // let segments = event.segments;
+        // for (const segment of segments) {
+        //     console.log(segment);
+            
+        // }
+        // console.log(1221, event.segments, newBoard);
     }
 }
