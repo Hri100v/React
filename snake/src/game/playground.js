@@ -72,16 +72,16 @@ export class PlayGround extends React.PureComponent {
 
     onSnakeMove = (event) => {
         console.log("onSnakeMove");
-        this.clear();        
+        this.clear();
         let newBoard = this.deepCopyOfBoard(this.state.board);
         let segments = event.segments;
-        
         // snake segment is 2
         for (const segment of segments) {
             let coordinates = segment.coordinates
-            newBoard[coordinates.y][coordinates.x] = 2;            
+            newBoard[coordinates.y][coordinates.x] = 2;
         }
-        this.update(newBoard)
+
+        this.update(newBoard);
     }
 
     // boundary
@@ -148,9 +148,7 @@ export class PlayGround extends React.PureComponent {
         // console.log("--drawing--");
         let segments = [];
         for (const row of this.state.board) {
-            // console.log(2002, row);
             for (const col of row) {
-                // console.log(2332, col);
                 switch (col) {
                     case 1:
                         // boundary
@@ -190,24 +188,12 @@ export class PlayGround extends React.PureComponent {
             });
         });
 
-        // this.boardReference.current.innerHTML = '';
-        // const parent = this.boardReference.current.parent();
         let boardContent = this.boardReference.current;
         let boardChildren = boardContent.children
-        // console.log(this.boardReference.current, boardChildren.length);
 
-        // let ll = 0;
         if (boardChildren.length !== 0) {
             // console.log("Has children", boardChildren);
-            ReactDOM.unmountComponentAtNode(this.boardReference.current)
-
-            // for (const child of boardChildren) {
-            //     if (ll < 10) {
-            //         console.log(child, boardContent);
-            //         boardContent.removeChild(child);
-            //     }
-            //     ll++;
-            // }
+            ReactDOM.unmountComponentAtNode(this.boardReference.current);
         }
 
         ReactDOM.render(
@@ -270,18 +256,9 @@ export class PlayGround extends React.PureComponent {
         this.draw();
     }
 
-    // doSomething = (value) => {
-    //     // Do something here with value
-    //     console.log("It is in the Parent!", value);
-    // };
-
     render() {
         const { children } = this.props;
-        // console.log(this.props);
-
         const childrenWithProps = React.Children.map(children, child => {
-            // console.log(child);
-
             return React.cloneElement(child, {
                 playGround: this,
                 board: this.state.board,
@@ -291,22 +268,12 @@ export class PlayGround extends React.PureComponent {
         });
 
         return <div className={"board"}>
-            <h1>Board</h1>
-
-            MyContext work!
-            {/* <MyContext.Provider value={{ doSomething: this.doSomething }}>
-                {this.props.children}
-            </MyContext.Provider> */}
-            <br />
-
-            Another try:
+            {/* <br /> */}
+            {/* Another try: */}
             {childrenWithProps}
-
             <br />
-
-            Classic approach:
+            {/* Classic approach: */}
             {/* {this.props.children} */}
-
             <div ref={this.boardReference}
                 style={{
                     width: (this.state.cols * 10),
@@ -319,13 +286,13 @@ export class PlayGround extends React.PureComponent {
     }
 
     onMoving(event) {
-        console.log(4334);
-        
+        // console.log(4334);
+
         // let newBoard = this.deepCopyOfBoard(this.state.board);
         // let segments = event.segments;
         // for (const segment of segments) {
         //     console.log(segment);
-            
+
         // }
         // console.log(1221, event.segments, newBoard);
     }
