@@ -16,7 +16,7 @@ export class Snake extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        console.log(1221, props, this.props.initState.coordinates);
+        // console.log(1221, props, this.props.initState.coordinates);
 
         this.state = {
             // parent: props.parent,
@@ -25,7 +25,9 @@ export class Snake extends React.PureComponent {
             color: "greenyellow",
             text: "initial state",
             direction: "none",
-            playGround: this.props.playGround
+            playGround: this.props.playGround,
+            // TODO: Update speed to change the difficulty
+            speed: 800
         };
 
         this.onClick = this.onClick.bind(this);
@@ -50,14 +52,31 @@ export class Snake extends React.PureComponent {
     }
 
     componentDidMount() {
+        let continueMoving = null;
         document.addEventListener("keydown", event => {
             if (this.directions[event.key]) {
-                // console.log(this.directions[event.key]);
-                this.move(this.directions[event.key]);
+                let direction = this.directions[event.key];
+                let isMoving = false;
+                if (this.setDirection !== direction) {
+                    this.setDirection = direction;
+                    // new direction
+                    if (!isMoving) {
+                        if (continueMoving) {
+                            clearInterval(continueMoving);
+                            continueMoving = null;
+                        }
+
+                        isMoving = true;
+                        continueMoving = setInterval(_ => {
+                            this.movingProcess(direction);
+                        }, this.state.speed);
+                    }
+                }
+
             }
         });
 
-        console.log('componentDidMount', this.state);
+        // console.log('componentDidMount', this.state);
     }
 
     checkForFood(board, head) {
@@ -129,86 +148,50 @@ export class Snake extends React.PureComponent {
         return shape;
     }
 
+    isProcessed = false;
+    setDirection = "none";
+    movingProcess(dir) {
+        this.move(dir);
+    }
+
     move(direction) {
         // Move the head only
         // after that move its sibling on its position
         // continue to the next
-
+        let positionSnake = null;
+        let food = null;
 
         // C H A N G E
         // position of .grow() method after the .refreshMove()
         switch (direction) {
             case "up":
-                // moving it up
-                // console.log("UP");
-                // this.moveUp(this.testGrid);
-                if (this.state.direction !== direction) {
-                    let positionSnake = this.moveUp(this.state.segments, 0);
-
-                    let food = this.checkForFood(this.state.playGround.state.board, positionSnake[0]);
-                    if (food) {
-                        // console.log("Important!", direction, positionSnake, food);
-                        
-                        let newSegments = this.grow(food);
-                        this.setState({ direction: direction, segments: newSegments.segments });
-                    } else {
-                        this.setState({ direction: direction, segments: positionSnake });
-                    }                    
-                }
-
+                positionSnake = this.moveUp(this.state.segments, 0);
+                food = this.checkForFood(this.state.playGround.state.board, positionSnake[0]);
                 break;
             case "down":
-                // moving it down
-                // if (this.state.direction !== direction) {
-                let positionSnake2 = this.moveDown(this.state.segments, 0);
-                let food2 = this.checkForFood(this.state.playGround.state.board, positionSnake2[0]);
-                if (food2) {
-                    let newSegments = this.grow(food2);
-                    this.setState({ direction: direction, segments: newSegments.segments });
-                } else {
-                    this.setState({ direction: direction, segments: positionSnake2 });
-                } 
-                // console.log(positionSnake);
-                // console.log(positionSnake[0].coordinates);
-                // this.setState({ segments: positionSnake });
-                // this.setState({ direction: direction, segments: positionSnake2 });
-                // }
+                positionSnake = this.moveDown(this.state.segments, 0);
+                food = this.checkForFood(this.state.playGround.state.board, positionSnake[0]);
                 break;
             case "left":
-                // moving it left
-                // if (this.state.direction !== direction) {
-                let positionSnake3 = this.moveLeft(this.state.segments, 0);
-                let food3 = this.checkForFood(this.state.playGround.state.board, positionSnake3[0]);
-                if (food3) {
-                    let newSegments = this.grow(food3);
-                    this.setState({ direction: direction, segments: newSegments.segments });
-                } else {
-                    this.setState({ direction: direction, segments: positionSnake3 });
-                } 
-                // this.setState({ direction: direction, segments: positionSnake3 });
-                // }
+                positionSnake = this.moveLeft(this.state.segments, 0);
+                food = this.checkForFood(this.state.playGround.state.board, positionSnake[0]);
                 break;
             case "right":
-                // moving it right
-                // if (this.state.direction !== direction) {
-                let positionSnake4 = this.moveRight(this.state.segments, 0);
-                let food4 = this.checkForFood(this.state.playGround.state.board, positionSnake4[0]);
-                if (food4) {
-                    let newSegments = this.grow(food4);
-                    this.setState({ direction: direction, segments: newSegments.segments });
-                } else {
-                    this.setState({ direction: direction, segments: positionSnake4 });
-                } 
-                // console.log(positionSnake);
-                // console.log(positionSnake[0].coordinates);
-                // this.setState(state => {return { segments: positionSnake }});
-                // this.setState({ direction: direction, segments: positionSnake4 });
-                // }
+                positionSnake = this.moveRight(this.state.segments, 0);
+                food = this.checkForFood(this.state.playGround.state.board, positionSnake[0]);
                 break;
 
             default:
                 break;
         }
+
+        if (food) {
+            let newSegments = this.grow(food);
+            this.setState({ direction: direction, segments: newSegments.segments });
+        } else {
+            this.setState({ direction: direction, segments: positionSnake });
+        }
+
         this.refreshMove();
     }
 
@@ -220,128 +203,115 @@ export class Snake extends React.PureComponent {
     grow(foodPosition) {
         console.log("Snake Grow");
         console.log("%cShould add new food - return event for growing", "color: red;");
-        
-
         // this.setState(state => {
-            // TODO: Check for the last item and add a new one after it
-            // also should be checked other (changes on the last item)
-            let length = this.state.segments.length;
-            let lastSegment = this.state.segments[length - 1];
-            console.log("lastSegment", lastSegment);
-            // let segments = Object.assign({}, this.state.segments);
-            let segments = [];
+        // TODO: Check for the last item and add a new one after it
+        // also should be checked other (changes on the last item)
+        let length = this.state.segments.length;
+        let lastSegment = this.state.segments[length - 1];
+        // console.log("lastSegment", lastSegment);
+        // let segments = Object.assign({}, this.state.segments);
+        let segments = [];
 
-            segments[0] = this.state.segments[0];
+        segments[0] = this.state.segments[0];
 
-            /** 
-             * coordinates: {x: 2, y: 8}
-                next: null
-                prev: null
-            */
+        /** 
+         * coordinates: {x: 2, y: 8}
+            next: null
+            prev: null
+        */
 
-            // TODO: Should check if here do not have a second item
-            // TODO: Check for available cell - playGround.getCell(x, y)
-            if (length == 1) {
-                console.log(this.state.direction);
-                segments[0].next = 1;
-                segments[1] = {};
-                segments[1].next = null;
-                segments[1].prev = 0;
-                switch (this.state.direction) {
-                    case "up":
-                        segments[1].coordinates = {
-                            x: lastSegment.coordinates.x,
-                            y: lastSegment.coordinates.y + 1
-                        };
-                        break;
-                    case "down":
-                        segments[1].coordinates = {
-                            x: lastSegment.coordinates.x,
-                            y: lastSegment.coordinates.y - 1
-                        };
-                        break;
-                    case "left":
-                        segments[1].coordinates = {
-                            x: lastSegment.coordinates.x + 1,
-                            y: lastSegment.coordinates.y
-                        };
-                        break;
-                    case "right":
-                        segments[1].coordinates = {
-                            x: lastSegment.coordinates.x - 1,
-                            y: lastSegment.coordinates.y
-                        };
-                        break;
-                    default:
-                        break;
-                }
-
-                return {
-                    segments: segments
-                };
-            } else {
-                let segmentBeforeLastOne = this.state.segments[length - 2];
-                segments[length - 1].next = length;
-                // x x x x x ~
-                // 1 1 1 1 1 y
-                // 1 0 0 0 1 y
-                // 1 0 0 0 1 y
-                // 1 0 0 0 1 y
-                // 1 1 1 1 1 y
-                console.log("Check this logic below!");
-
-                // x1 - x2
-                // let dX = -1; // x1 < x2
-                // let dX = 1;  // x1 > x2
-                let dX = segmentBeforeLastOne.coordinates.x - lastSegment.coordinates.x;
-                let dY = segmentBeforeLastOne.coordinates.y - lastSegment.coordinates.y;
-
-                // ANOTHER option is to be 0 => dX = 0; or dY = 0;
-
-                // Check if 
-                //      dX == 0         => same column      => then I should move it on UP or DOWN (dY)
-                //      dX < 0  -> -1   => should set on the right
-                //      dX > 0  -> +1   => should set on the left
-
-                if (dY === 0) {
-                    // the same row
-                    segments.push({
-                        coordinates: {
-                            x: lastSegment.coordinates.x - dX,
-                            y: lastSegment.coordinates.y
-                        },
-                        next: null,
-                        prev: (length - 1)
-                    });
-                }
-
-                if (dX === 0) {
-                    // the same column
-                    segments.push({
-                        coordinates: {
-                            x: lastSegment.coordinates.x,
-                            y: lastSegment.coordinates.y - dY
-                        },
-                        next: null,
-                        prev: (length - 1)
-                    });
-                }
-
-                // segments.push({
-                //     coordinates: {
-                //         x: lastSegment.coordinates.x - dX,
-                //         y: 1
-                //     },
-                //     next: null,
-                //     prev: (length - 1)
-                // });
-                return {
-                    segments: segments
-                };
+        // TODO: Should check if here do not have a second item
+        // TODO: Check for available cell - playGround.getCell(x, y)
+        if (length == 1) {
+            console.log(this.state.direction);
+            segments[0].next = 1;
+            segments[1] = {};
+            segments[1].next = null;
+            segments[1].prev = 0;
+            switch (this.state.direction) {
+                case "up":
+                    segments[1].coordinates = {
+                        x: lastSegment.coordinates.x,
+                        y: lastSegment.coordinates.y + 1
+                    };
+                    break;
+                case "down":
+                    segments[1].coordinates = {
+                        x: lastSegment.coordinates.x,
+                        y: lastSegment.coordinates.y - 1
+                    };
+                    break;
+                case "left":
+                    segments[1].coordinates = {
+                        x: lastSegment.coordinates.x + 1,
+                        y: lastSegment.coordinates.y
+                    };
+                    break;
+                case "right":
+                    segments[1].coordinates = {
+                        x: lastSegment.coordinates.x - 1,
+                        y: lastSegment.coordinates.y
+                    };
+                    break;
+                default:
+                    break;
             }
 
+            return {
+                segments: segments
+            };
+        } else {
+            let segmentBeforeLastOne = this.state.segments[length - 2];
+            segments[length - 1].next = length;
+            // x x x x x ~
+            // 1 1 1 1 1 y
+            // 1 0 0 0 1 y
+            // 1 0 0 0 1 y
+            // 1 0 0 0 1 y
+            // 1 1 1 1 1 y
+            console.log("Check this logic below!");
 
-        // }); // SetState
+            // x1 - x2
+            // let dX = -1; // x1 < x2
+            // let dX = 1;  // x1 > x2
+            let dX = segmentBeforeLastOne.coordinates.x - lastSegment.coordinates.x;
+            let dY = segmentBeforeLastOne.coordinates.y - lastSegment.coordinates.y;
+
+            // ANOTHER option is to be 0 => dX = 0; or dY = 0;
+
+            // Check if 
+            //      dX == 0         => same column      => then I should move it on UP or DOWN (dY)
+            //      dX < 0  -> -1   => should set on the right
+            //      dX > 0  -> +1   => should set on the left
+
+            if (dY === 0) {
+                // the same row
+                segments.push({
+                    coordinates: {
+                        x: lastSegment.coordinates.x - dX,
+                        y: lastSegment.coordinates.y
+                    },
+                    next: null,
+                    prev: (length - 1)
+                });
+            }
+
+            if (dX === 0) {
+                // the same column
+                segments.push({
+                    coordinates: {
+                        x: lastSegment.coordinates.x,
+                        y: lastSegment.coordinates.y - dY
+                    },
+                    next: null,
+                    prev: (length - 1)
+                });
+            }
+
+            return {
+                segments: segments
+            };
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {

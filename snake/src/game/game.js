@@ -16,9 +16,6 @@ export class GameSnake extends React.PureComponent {
         }
     }
 
-    // TODO:
-    // Try to bind to events and do logic HERE in the "game.js"
-
     componentDidMount() {
         setTimeout(() => {
             this.setState({
@@ -26,8 +23,6 @@ export class GameSnake extends React.PureComponent {
             });
         }, 4000);
     }
-
-
 
     moving(event) {
         console.log(event, 4444);
@@ -51,6 +46,12 @@ export class GameSnake extends React.PureComponent {
                     Snake Heart
                 </Snake>
             </PlayGround>
+
+            <p>
+                TODO: Need to add food after snake grow!
+                (it happens once)
+            </p>
+            <p>TODO: Catch the errors (boundary)</p>
         </div>;
     }
 }

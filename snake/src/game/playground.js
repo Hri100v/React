@@ -92,7 +92,6 @@ export class PlayGround extends React.PureComponent {
             let updateOnBoard = state.board;
             let snakePosition = state.snake[0].coordinates;
             updateOnBoard[snakePosition.y][snakePosition.x] = 2;
-            // console.log(2002, state.board);            
 
             return {
                 board: updateOnBoard
@@ -247,7 +246,7 @@ export class PlayGround extends React.PureComponent {
     }
 
     update(newBoard) {
-        console.log("Update Board!");
+        // console.log("Update Board!");
         // Re-draw the board
         this.setState({
             board: newBoard
@@ -283,17 +282,5 @@ export class PlayGround extends React.PureComponent {
                 create board here - with adding segments
             </div>
         </div>;
-    }
-
-    onMoving(event) {
-        // console.log(4334);
-
-        // let newBoard = this.deepCopyOfBoard(this.state.board);
-        // let segments = event.segments;
-        // for (const segment of segments) {
-        //     console.log(segment);
-
-        // }
-        // console.log(1221, event.segments, newBoard);
     }
 }
