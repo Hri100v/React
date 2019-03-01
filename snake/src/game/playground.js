@@ -71,7 +71,7 @@ export class PlayGround extends React.PureComponent {
     }
 
     onSnakeMove = (event) => {
-        console.log("onSnakeMove");
+        // console.log("onSnakeMove");
         this.clear();
         let newBoard = this.deepCopyOfBoard(this.state.board);
         let segments = event.segments;
@@ -163,7 +163,6 @@ export class PlayGround extends React.PureComponent {
                         // food
                         const food = <Segment color={"red"} />;
                         segments.push(food);
-                        // console.log("food");
                         break;
                     case 4:
                         // obstacle
@@ -210,7 +209,6 @@ export class PlayGround extends React.PureComponent {
         const rowsSize = this.state.rows;
         do {
             let randomCell = this.getRandomCellWithCoordinates(colsSize, rowsSize);
-            // console.log(randomCell, this.validationCell(randomCell));
             if (this.validationCell(randomCell)) {
                 isValid = false;
                 foodPlace = randomCell;
@@ -246,7 +244,6 @@ export class PlayGround extends React.PureComponent {
     }
 
     update(newBoard) {
-        // console.log("Update Board!");
         // Re-draw the board
         this.setState({
             board: newBoard
@@ -267,12 +264,8 @@ export class PlayGround extends React.PureComponent {
         });
 
         return <div className={"board"}>
-            {/* <br /> */}
-            {/* Another try: */}
             {childrenWithProps}
             <br />
-            {/* Classic approach: */}
-            {/* {this.props.children} */}
             <div ref={this.boardReference}
                 style={{
                     width: (this.state.cols * 10),

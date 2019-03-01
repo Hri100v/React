@@ -25,7 +25,7 @@ export class GameSnake extends React.PureComponent {
     }
 
     moving(event) {
-        console.log(event, 4444);
+        // console.log(event, 4444);
     }
 
     clicked() {
@@ -34,8 +34,8 @@ export class GameSnake extends React.PureComponent {
 
     render() {
         return <div>
-            <h1>{this.state.testText}</h1>
-            <h2>Loading Snake Position</h2>
+            {/* <h1>{this.state.testText}</h1>
+            <h2>Loading Snake Position</h2> */}
             <PlayGround ref={this.board} columns={20} rows={20}>
                 <Snake ref={this.snake}
                     // parent={this.state.board}
@@ -51,7 +51,7 @@ export class GameSnake extends React.PureComponent {
                 TODO: Need to add food after snake grow!
                 (it happens once)
             </p>
-            <p>TODO: Catch the errors (boundary)</p>
+            {/* <p>TODO: Catch the errors (boundary)</p> */}
         </div>;
     }
 }

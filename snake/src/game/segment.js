@@ -17,12 +17,9 @@ export class Segment extends React.PureComponent {
         }
     }
 
-    coordinates = { x: 0, y: 0 };
-
     render() {
         const size = 10;
         return <div className={"snake-segment"}
-            // onClick={this.onClick}
             style={{
                 margin: this.state.margin,
                 width: size,
@@ -34,17 +31,7 @@ export class Segment extends React.PureComponent {
         </div>;
     }
 
-    transfer(...args) {
-        console.log(...args, 1771);
-    }
-
     componentDidMount() {
         // console.log("componentDidMount", this.props);        
     }
-
-    // MyContext
-    // // Way to pass data to the Parent
-    // onClick = () => {
-    //     this.context.doSomething(this.props.value);
-    // };
 }

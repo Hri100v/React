@@ -27,7 +27,7 @@ export class Snake extends React.PureComponent {
             direction: "none",
             playGround: this.props.playGround,
             // TODO: Update speed to change the difficulty
-            speed: 800
+            speed: 600
         };
 
         this.onClick = this.onClick.bind(this);
@@ -44,44 +44,90 @@ export class Snake extends React.PureComponent {
     render() {
         return <div onClick={this.onClick}>
 
-            <h2>The Snake</h2>
+            <h4>The Snake</h4>
             <p>{this.state.text}</p>
             <Segment color={this.state.color} margin={1}>first</Segment>
-            <Segment color={"green"} margin={1}>second</Segment>
+            <Segment color={this.state.color} margin={1}>second</Segment>
         </div>;
     }
 
+    isValidMove = true;
     componentDidMount() {
         let continueMoving = null;
         document.addEventListener("keydown", event => {
-            if (this.directions[event.key]) {
-                let direction = this.directions[event.key];
-                let isMoving = false;
-                if (this.setDirection !== direction) {
-                    this.setDirection = direction;
-                    // new direction
-                    if (!isMoving) {
-                        if (continueMoving) {
-                            clearInterval(continueMoving);
-                            continueMoving = null;
-                        }
+            if (this.isValidMove) {
 
-                        isMoving = true;
-                        continueMoving = setInterval(_ => {
-                            this.movingProcess(direction);
-                        }, this.state.speed);
+                if (this.directions[event.key]) {
+                    let direction = this.directions[event.key];
+                    let isMoving = false;
+                    if (this.setDirection !== direction) {
+                        this.setDirection = direction;
+                        // new direction
+                        if (!isMoving) {
+                            if (continueMoving) {
+                                clearInterval(continueMoving);
+                                continueMoving = null;
+                            }
+
+                            isMoving = true;
+                            continueMoving = setInterval(_ => {
+                                // Check the cell in front
+                                if (this.checkIsValidMove(this.state.playGround.state.board, this.state.segments[0], direction)) {
+                                    this.movingProcess(direction);
+                                } else {
+                                    // Show end of the game!
+                                    clearInterval(continueMoving);
+                                    this.isValidMove = false;
+                                    this.setState({
+                                        text: " * * * * Game Over * * * *"
+                                    });
+                                    
+                                    // TODO: Return event to change the color of the snake
+                                }
+
+                            }, this.state.speed);
+                        }
                     }
                 }
-
             }
         });
+    }
 
-        // console.log('componentDidMount', this.state);
+    checkIsValidMove(board, head, dir) {
+        let cellInFront = { x: -1, y: -1 };
+        switch (dir) {
+            case this.directions.ArrowUp:
+                cellInFront.x = head.coordinates.x;
+                cellInFront.y = head.coordinates.y - 1;
+                break;
+            case this.directions.ArrowDown:
+                cellInFront.x = head.coordinates.x;
+                cellInFront.y = head.coordinates.y + 1;
+                break;
+            case this.directions.ArrowLeft:
+                cellInFront.x = head.coordinates.x - 1;
+                cellInFront.y = head.coordinates.y;
+                break;
+            case this.directions.ArrowRight:
+                cellInFront.x = head.coordinates.x + 1;
+                cellInFront.y = head.coordinates.y;
+                break;
+            default:
+                break;
+        }
+
+        // Has impossible position
+        let cell = board[cellInFront.y][cellInFront.x];
+        if (cell === 1) {
+            // boundary = 1
+            return false;
+        }
+        // TODO: Check for itself and avoid food (true)
+
+        return true;
     }
 
     checkForFood(board, head) {
-        // console.log(board, head, 1001);
-
         let cellValue = board[head.coordinates.y][head.coordinates.x];
         if (cellValue === 3) {
             console.log("Eat Food!");
@@ -203,13 +249,8 @@ export class Snake extends React.PureComponent {
     grow(foodPosition) {
         console.log("Snake Grow");
         console.log("%cShould add new food - return event for growing", "color: red;");
-        // this.setState(state => {
-        // TODO: Check for the last item and add a new one after it
-        // also should be checked other (changes on the last item)
         let length = this.state.segments.length;
         let lastSegment = this.state.segments[length - 1];
-        // console.log("lastSegment", lastSegment);
-        // let segments = Object.assign({}, this.state.segments);
         let segments = [];
 
         segments[0] = this.state.segments[0];
@@ -219,7 +260,6 @@ export class Snake extends React.PureComponent {
             next: null
             prev: null
         */
-
         // TODO: Should check if here do not have a second item
         // TODO: Check for available cell - playGround.getCell(x, y)
         if (length == 1) {
@@ -278,7 +318,6 @@ export class Snake extends React.PureComponent {
             let dY = segmentBeforeLastOne.coordinates.y - lastSegment.coordinates.y;
 
             // ANOTHER option is to be 0 => dX = 0; or dY = 0;
-
             // Check if 
             //      dX == 0         => same column      => then I should move it on UP or DOWN (dY)
             //      dX < 0  -> -1   => should set on the right
@@ -314,27 +353,12 @@ export class Snake extends React.PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        // console.log(8998, prevProps, prevState);
-        console.log(8998);
-        // debugger;
-        // this.refreshMove();
-    }
-
     // Way to pass data to the Parent
     onClick() {
         console.log("Snake class - clicking");
         console.log(this.state);
-
-        // this.setState({
-        //     color: "green",
-        //     text: "update state"
-        // });
-
         // color1: "green",
         // color2: "yellowgreen",
         // color3: "red"
-
-        // this.context.doSomething(this.props.value);
     };
 }
