@@ -4,11 +4,7 @@ import ReactDOM from 'react-dom';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-function MyInfo() {
-  return (
-    <div>Loading</div>
-  );
-};
+import MyInfo from "./MyInfo.js";
 
 ReactDOM.render(<MyInfo />, document.getElementById("root"));
 
