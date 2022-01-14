@@ -27,3 +27,22 @@ describe('Start Testing', () => {
     expect(mainContainer.length > 0).toBe(true);
   });
 });
+
+/* Functional Testing */
+describe('Functional Testing', () => {
+  test('click on check button', () => {
+    return false;
+  });
+
+  test('get input', () => {
+    return false;
+  });
+
+  test('matcher function', () => {
+    return false;
+  });
+
+  test('result checker', () => {
+    return false;
+  });
+});
