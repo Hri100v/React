@@ -1,7 +1,17 @@
 import { render, screen } from '@testing-library/react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-dom/test-utils';
 import App from './App';
+
+let container;
+
+beforeEach(() => {
+  container = document.createElement('div');
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  document.body.removeChild(container);
+  container = null;
+});
 
 /* Start Testing */
 describe('Start Testing', () => {
@@ -12,18 +22,8 @@ describe('Start Testing', () => {
   });
   
   test('renders the main container exists', () => {
-    // const { app } = render(<App />);
-    // const mainContainer = screen.queryAllByText('main');
-    // const mainContainer = app.firstChild();
-    // console.log(mainContainer, 1001);
-    // expect(mainContainer).toBeInTheDocument();
-
-    // const mainContainer = screen.getByRole('div');
-    // expect(mainContainer).toHaveClass('main');
-
-    ReactDOM.render(<App />);
-
-    let mainContainer = TestUtils.findRenderedDOMComponentWithClass('main');
-    expect(mainContainer).to.exists();
+    /* const { app } = */render(<App />);
+    let mainContainer = document.getElementsByClassName('main');
+    expect(mainContainer.length > 0).toBe(true);
   });
 });
