@@ -1,0 +1,18 @@
+.app {
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.main {
+    display: grid;
+    grid-template-rows: 1fr 0.5fr;
+    text-align: center;
+}
+
+.inputArea {
+    display: center;
+    grid-template-rows: 200px 100px;
+    grid-column-gap: 10px;
+}
