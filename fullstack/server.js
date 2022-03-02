@@ -1,6 +1,9 @@
 const express       = require('express'),
     cors            = require('cors');
 
+// var testAPIRouter = require('./routes/testAPI');
+// var testAPIRouter = require('testAPI.js');
+
 const API_PORT = process.env.PORT || 5000;
 const app = express();
 
@@ -16,5 +19,10 @@ app.get('/quit', (request, response) => {
     response.send({ result: 'Good bye' });
 });
 
+// app.use('/testAPI', testAPIRouter);
+
+app.get('/testAPI', (request, response) => {
+    response.send({ result: 'API is working properly :)' });
+});
 
 app.listen(API_PORT, () => { console.log(`Server running on ${API_PORT}`) });
