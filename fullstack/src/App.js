@@ -1,11 +1,15 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 
-let firstLoad = true;
-function App() {
-  const [content, setContent] = useState(['hi there']);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      content: 'hi there'
+    }
+  }
 
-  const getData = async (url) => {
+  getData = async (url) => {
     let newData = await fetch(url, {
       method: 'GET',
       headers: {
@@ -16,23 +20,21 @@ function App() {
       .then(res => res.json());
 
     console.log(newData);
-    setContent(newData.result);
+    this.setState({ content: newData.result });
   }
 
-  console.log(firstLoad);
-
-  if (firstLoad) {
-    firstLoad = false;
-    getData('/api');
-    // setContent('test');
+  componentDidMount() {
+    this.getData('/api');
   }
 
-  return (
-    <div className="App">
-      <button onClick={() => { getData('/quit') }}>Click Quit</button>
-      {content}
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+        <button onClick={() => { this.getData('/quit') }}>Click Quit</button>
+        {this.state.content}
+      </div>
+    );
+  }
 }
 
 export default App;
