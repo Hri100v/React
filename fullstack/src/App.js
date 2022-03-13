@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 
-class App extends React.Component {
+class App extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +41,7 @@ class App extends React.Component {
 
   handleQuit() {
     console.log('Handle Quit');
-    
+
     this.getData('/quit');
     this.setState({ apiResponse: '', isHidden: true });
   }
