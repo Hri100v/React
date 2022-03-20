@@ -1,38 +1,41 @@
 import React, { useState } from 'react';
 import './App.css';
+import { Button } from './Button';
 
-function App() {
-  let palendrome = [];
-  
-  const reverseWord = (value) => {
-    for (let i = value.length - 1; i <= 0; i -= 1) {
-      const letter = value[i];
-      palendrome.push(letter);
-    }
-  };
+// export const add = (x, y) => x + y;
 
-  const handleInput = (event) => {
-    console.log('handleInput()');
-    // console.log(event);
-  };
+export let util = {
+  add: null,
+  formCheck: null
+};
 
-  const checkForm = () => {
-    console.log('checkForm()');
-    return 1;
+
+const App = ({ handleClick }) => {
+  util.add = (x, y) => x + y;
+
+  const [submitForm, setSubmitForm] = useState();
+
+  // const checkForm = () => {
+  //   // console.log('checkForm()');
+  //   console.log('checkForm() #2');
+  //   // return 1;
+  // };
+
+  const clickOnSubmitButton = () => {
+    setSubmitForm('Change Form');
+    return 'Update Content';
   };
 
   return (
     <div className='app'>
-      <div className='main'>
-        <h1>Start Now!</h1>
-        
-        <div className='inputArea'>
-          <input placeholder={'type a symetric word'} onChange={handleInput} />
-          <button onClick={checkForm}>Submit</button>
-        </div>
+      {/* <button onClick={checkForm}>Submit</button> */}
+      {/* <button onClick={() => handleClick()}>Submit</button> */}
+      {/* <button onClick={() => setSubmitForm("Change Form")}>Submit</button> */}
+      {submitForm}
 
-        <div className='message'>empty</div>
-
+      <div>
+        {/* <Button data-testid='inner-button' handlingClick={() => 'Updated Content'} /> */}
+        <Button data-testid='inner-button' handlingClick={() => clickOnSubmitButton()} />
       </div>
     </div>
   );

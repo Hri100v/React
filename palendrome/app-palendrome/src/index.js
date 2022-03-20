@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <App handleClick={() => { console.log("Custom Function") }} />
   </React.StrictMode>,
   document.getElementById('root')
 );
