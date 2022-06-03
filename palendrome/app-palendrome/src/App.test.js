@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 
-import App from './App';
+import App, { reverseWord, handleInput } from './App';
 
 import { Button, subtract, clickHandling } from './Button';
 
@@ -51,12 +51,17 @@ describe('Start Testing', () => {
 /* Functional Testing */
 describe('Functional Testing', () => {
 
-  test('existing of the <Button />', () => {
-    // const { getByTestId } = render(<App />);
-    // const CustomButton = getByTestId('button');
-    // console.log(app);
-    const CustomButton = app.findByTestId('button');
-    expect(CustomButton).toBeTruthy();
+  test('"reverseWord" function', () => {
+    const jestReverseWord = jest.fn(reverseWord);
+    console.log(jestReverseWord('tool'));
+    expect(jestReverseWord('tool')).toBe('loot');
+  });
+
+  test('"handleInput" function', () => {
+    const input = mainContainer[0].getElementsByTagName('input');
+    console.log(input, 5005);
+    fireEvent.change(input, { target: { value: 'video' } });
+    expect(input.value).toBe('video');
   });
 
 });
