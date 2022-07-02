@@ -1,13 +1,13 @@
 import './App.css';
-
 import firebase from 'firebase/compat/app';
-
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
-
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useState } from 'react';
+import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
+// import { Input } from '@mui/material';
 
 firebase.initializeApp({
   apiKey: "AIzaSyApa256PA52QGtokGzVYZKoz54_fVw8YMM",
@@ -24,10 +24,6 @@ const firestore = firebase.firestore();
 
 function App() {
   const [user] = useAuthState(auth);
-
-  console.log(1001);
-  // console.log(auth.currentUser);
-
   return (
     <div className="App">
       <header className="App-header">
@@ -48,28 +44,26 @@ function SignIn() {
   };
 
   return (
-    <button onClick={signInWithGoogle}>Sign in with Google</button>
+    // <button onClick={signInWithGoogle}>Sign in with Google</button>
+    <Button variation='outlined' fullWidth={true} onClick={signInWithGoogle}>Sign in with Google</Button>
+    // size='large'
   );
 }
 
 function SignOut() {
   return auth.currentUser && (
-
-    <button onClick={() => auth.signOut()}>Sign Out</button>
+    <Button variant='outlined' fullWidth={true} onClick={() => auth.signOut()}>Sign Out</Button>
   );
 }
 
 function ChatRoom() {
   const messageRef = firestore.collection('messages');
   const query = messageRef.orderBy('createdAt').limit(25);
-
   const [messages] = useCollectionData(query, { idField: 'id' });
-
   const [formValue, setFormValue] = useState('');
 
   const sendMessage = async (e) => {
     e.preventDefault();
-
     const { uid, photoURL } = auth.currentUser;
 
     await messageRef.add({
@@ -83,46 +77,60 @@ function ChatRoom() {
   }
 
   return (
-    <>
-      <div>
-        {messages && messages.map(msg =>
-          <ChatMessage key={msg.id}
+    <div className='main'>
+      <div className='signout'>
+        <SignOut />
+      </div>
+      <div className='message-container'>
+        {messages && messages.map((msg, index) => (<ChatMessage
+            key={index}
             message={msg}
             photoURL={auth.currentUser.photoURL}
-          />)}
+          />))}
       </div>
 
-      <div>
+      <div className='sendmessage-container'>
         <form onSubmit={sendMessage}>
-
-          <input value={formValue} onChange={(e) => { setFormValue(e.target.value) }} />
-
-          <button type='submit'>Send</button>
-
+          <div className='sendmessage'>
+            <Input style={{
+              width: '78%',
+              fontSize: '20px',
+              fontWeight: '450',
+              marginLeft: '5px',
+              marginBottom: '-3px'
+            }}
+              placeholder='Message....' value={formValue} onChange={(e) => { setFormValue(e.target.value) }} />
+            {/* <div className='form-button'> */}
+              <Button style={{
+                width: '18%',
+                height: '100%',
+                fontSize: '15px',
+                fontWeight: '550',
+                // margin: '4px 5% -13px 5%',
+                maxWidth: '200px'
+              }}
+                variant='contained' type='submit'>Send</Button>
+            {/* </div> */}
+          </div>
         </form>
       </div>
-
-      <SignOut />
-    </>
+    </div>
   )
 }
 
 function ChatMessage(props) {
-  const { text, uid, photoURL } = props.message;
+  const { text, uid, photoURL, messageKey } = props.message;
+
+  // console.log(photoURL);
 
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
 
-  // console.log(photoURL);
-  // console.log(props.message);
-  // console.log("props:", props);
-  // console.log(2002);
-  // console.log("auth.currentUser.photoURL:", auth.currentUser.photoURL);
-
+  // console.log(uid, props, 2552);
+  
   return (
     <div className={`message ${messageClass}`}>
-      <img src={photoURL} width={40} height={40} />
+      <img src={photoURL || 'https://freeiconshop.com/wp-content/uploads/edd/image-outline.png'} width={40} height={40} />
       <p>{text}</p>
-
     </div>
   );
 }
