@@ -47,9 +47,6 @@ body, #root {
 
 .message-container {
   color: #282c34;
-  /* margin: 24px 0;
-  display: flex;
-  flex-direction: column; */
   padding: 10px;
   height: 80vh;
   margin: 10vh 0 10vh;
@@ -141,7 +138,3 @@ p {
   border-top-left-radius: 1000px;
   float: left;
 }
-
-/* .dummy {
-  height: 150px;
-} */

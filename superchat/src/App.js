@@ -7,7 +7,6 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
-// import { Input } from '@mui/material';
 
 firebase.initializeApp({
   apiKey: "AIzaSyApa256PA52QGtokGzVYZKoz54_fVw8YMM",
@@ -44,9 +43,7 @@ function SignIn() {
   };
 
   return (
-    // <button onClick={signInWithGoogle}>Sign in with Google</button>
     <Button variation='outlined' fullWidth={true} onClick={signInWithGoogle}>Sign in with Google</Button>
-    // size='large'
   );
 }
 
@@ -108,17 +105,14 @@ function ChatRoom() {
               marginBottom: '-3px'
             }}
               placeholder='Message....' value={formValue} onChange={(e) => { setFormValue(e.target.value) }} />
-            {/* <div className='form-button'> */}
               <Button style={{
                 width: '18%',
                 height: '100%',
                 fontSize: '15px',
                 fontWeight: '550',
-                // margin: '4px 5% -13px 5%',
                 maxWidth: '200px'
               }}
                 variant='contained' type='submit'>Send</Button>
-            {/* </div> */}
           </div>
         </form>
       </div>
@@ -128,13 +122,8 @@ function ChatRoom() {
 
 function ChatMessage(props) {
   const { text, uid, photoURL, messageKey } = props.message;
-
-  // console.log(photoURL);
-
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
 
-  // console.log(uid, props, 2552);
-  
   return (
     <div className={`message ${messageClass}`}>
       <img src={photoURL || 'https://freeiconshop.com/wp-content/uploads/edd/image-outline.png'} width={40} height={40} />
