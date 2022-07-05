@@ -4,7 +4,7 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 // import { Input } from '@mui/material';
@@ -62,6 +62,8 @@ function ChatRoom() {
   const [messages] = useCollectionData(query, { idField: 'id' });
   const [formValue, setFormValue] = useState('');
 
+  const dummy = useRef();
+  
   const sendMessage = async (e) => {
     e.preventDefault();
     const { uid, photoURL } = auth.currentUser;
@@ -74,6 +76,8 @@ function ChatRoom() {
     });
 
     setFormValue('');
+
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
   }
 
   return (
@@ -87,6 +91,10 @@ function ChatRoom() {
             message={msg}
             photoURL={auth.currentUser.photoURL}
           />))}
+
+          <div className="message dummy" ref={dummy}>
+            <p></p>
+          </div>
       </div>
 
       <div className='sendmessage-container'>

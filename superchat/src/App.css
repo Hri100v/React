@@ -8,7 +8,6 @@ body, #root {
 }
 
 .App-header {
-  /* height: 40px; */
   text-align: center;
   padding: 10px 0px;
   background-color: #282c34;
@@ -16,15 +15,12 @@ body, #root {
 }
 
 .App-header h1 {
-  /* font-weight: 400vw; */
   font-size: 6vw;
   margin: 0 auto;
 }
 
 .App {
-  /* background-color: #282c34; */
   color: whitesmoke;
-  /* color: blue; */
   font-size: large;
   height: inherit;
 }
@@ -47,14 +43,17 @@ body, #root {
 
 .signout {
   background-color: #282c34;
-  /* padding: 10px; */
 }
 
 .message-container {
   color: #282c34;
-  /* padding: 10px; */
-  /* background-color: whitesmoke; */
-  margin: 24px 0;
+  /* margin: 24px 0;
+  display: flex;
+  flex-direction: column; */
+  padding: 10px;
+  height: 80vh;
+  margin: 10vh 0 10vh;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }
@@ -66,9 +65,6 @@ body, #root {
   bottom: 0;
   z-index: 1;
   border-top: 1px solid lightgray;
-  /* margin-left: -5px; */
-  /* padding: 10px;
-  padding-bottom: 30px; */
   background-color: #fafafa;
   height: 50px;
 }
@@ -83,48 +79,21 @@ body, #root {
   margin-right: 0px;
 }
 
-/* .message {
-  display: flex;
-  align-items: center;
-  width: fit-content;
-} */
-
-.sendmessage-container {
-  /* padding: 10px 0; */
-}
-
-form {
-  /* height: 10vh;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  max-width: 728px;
-  display: flex;
-  font-size: 1.5rem; */
-  /* background-color: rgb(128, 126, 126); */
-}
-
 form button {
   width: 20%;
   background-color: rgb(56, 56, 143);
 }
 
-input {
-  /* line-height: 1.5;
-  width: 100%;
-  font-size: 1.5rem;
-  background: rgb(58, 58, 58);
-  color: white;
-  outline: none;
-  border: none;
-  padding: 0 10px; */
-}
-
 img {
   border-radius: 50%;
+  width: 45px;
   height: 45px;
   margin-top: -15px;
   border: 2px solid black;
+}
+
+.sent img {
+  border: 2px solid white;
 }
 
 p {
@@ -144,7 +113,6 @@ p {
   border-radius: 3000px;
   box-shadow: 0 0 10px rgb(164, 164, 164);
   align-items: center;
-  /* width: fit-content; */
 }
 
 @media screen and (min-width: 600px) {
@@ -165,7 +133,6 @@ p {
   padding: 10px 20px 0 10px;
   text-align: end;
   float: right;
-  /* margin-left: auto; */
 }
 
 .received {
@@ -175,8 +142,6 @@ p {
   float: left;
 }
 
-/* .message-container {
-  margin: 110px 0;
-  display: flex;
-  flex-direction: column;
+/* .dummy {
+  height: 150px;
 } */
