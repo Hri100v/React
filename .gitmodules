@@ -1,0 +1,3 @@
+[submodule "comments-chat-v2"]
+	path = comments-chat-v2
+	url = ./comments-chat-v2
