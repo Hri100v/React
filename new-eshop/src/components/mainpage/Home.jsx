@@ -1,6 +1,8 @@
 import React from 'react'
+import './Home.css'
 import { Categories } from './Categories'
-import { SlideCard } from './SlideCard'
+import { Slider } from './Slider'
+// import styles from './Home.css'
 
 export const Home = () => {
   return (
@@ -8,7 +10,7 @@ export const Home = () => {
         <section className="home">
             <div className="container d_flex">
                 <Categories />
-                <SlideCard />
+                <Slider />
             </div>
         </section>
     </>
