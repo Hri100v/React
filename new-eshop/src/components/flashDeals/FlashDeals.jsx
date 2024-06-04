@@ -1,7 +1,7 @@
-import React from "react"
-import { FlashCard } from "./FlashCard"
+import React from "react";
+import { FlashCard } from "./FlashCard";
 
-export const FlashDeals = () => {
+export const FlashDeals = ({ productItems, addToCard }) => {
   return (
     <>
       <section className="flash background">
@@ -10,9 +10,9 @@ export const FlashDeals = () => {
             <i className="fa fa-bolt"></i>
             <h1>FlashDeals</h1>
           </div>
-          <FlashCard />
+          <FlashCard productItems={productItems} addToCard={addToCard} />
         </div>
       </section>
     </>
-  )
-}
+  );
+};
