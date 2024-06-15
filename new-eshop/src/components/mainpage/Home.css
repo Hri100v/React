@@ -57,9 +57,9 @@
   margin: auto !important;
 }
 
-.slick-slide .box {
+/* .slick-slide .box {
   display: flex !important;
-}
+} */
 
 .slick-slide .box .left {
   width: 70%;

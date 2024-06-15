@@ -1,0 +1,105 @@
+.card-items {
+    background: #f6f9fc;
+    height: auto;
+    padding: 50px 0;
+}
+
+.card-items .card-details {
+    width: 70%;
+
+}
+
+.card-items .card-total {
+    width: 30%;
+    margin-top: 30px;
+    margin-left: 30px;
+    height: 130px;
+}
+
+.card-list {
+    background: white;
+    margin-top: 30px;
+}
+
+.card-items .img {
+    width: 150px;
+    height: 150px;
+}
+
+.card-items .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.card-items .card-details h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.card-items .card-details h4 {
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 50px;
+    color: gray;
+}
+
+.card-items h4 span {
+    color: #e94560;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+.removeCard {
+    background: none;
+    font-size: 25px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.cardControl {
+    margin-top: 50px;
+}
+
+.cardControl button {
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.incCard {
+    background: none;
+}
+
+.decCard {
+    background: #f6f9fc;
+}
+
+.card-total h4 {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.card-total h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #e94560;
+}
+
+.card-total h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgb(3 0 71 / 9%);
+    padding-bottom: 10px;
+    color: #e94560;
+}
+
+.no-items {
+    color: #e94560;
+    font-size: 18px;
+    margin-top: 20px;
+    height: 130px;
+}
