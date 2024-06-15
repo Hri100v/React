@@ -82,6 +82,18 @@ button {
   box-shadow: rgb(43 52 69 / 10%) 0 4px 16px;
 }
 
+.discount {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #e94560;
+  padding: 3px 10px;
+  font-size: 12px;
+  border-radius: 50px;
+  color: #ffffff;
+  margin: 10px;
+}
+
 /*------------------category------------------*/
 .contentWidth {
   width: 77%;
@@ -251,6 +263,37 @@ button {
   cursor: pointer;
 }
 /*------------------control-btn------------------*/
+
+/*------------------heading------------------*/
+.heading .heading-left i {
+  font-size: 30px;
+}
+
+.heading .heading-left h2 {
+  font-size: 25px;
+  margin: 5px;
+}
+
+.heading .heading-right,
+.heading .heading-right i {
+  text-align: right;
+  color: grey;
+}
+/*------------------heading------------------*/
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  /* grid-gap: 30px; */
+  /* grid-column-gap: 30px; */
+  column-gap: 30px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 10px;
+}
 
 .flag {
   width: 22px;

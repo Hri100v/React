@@ -37,6 +37,7 @@
 .search-box {
   width: 80%;
   border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
 }
 
 .search-box i {
@@ -64,6 +65,7 @@ button {
   opacity: 0.5;
   border-left: 2px solid rgba(0, 0, 0, 0.1);
   padding: 10px;
+  user-select: none;
 }
 
 .cart {
@@ -212,7 +214,7 @@ header ul li a:hover {
   }
 }
 
-/* video: 54:26 */
+/* video: 1:48:30 */
 /* https://www.youtube.com/watch?v=K3L8J0DbuT8&ab_channel=GorkCoder */
 
 /*------------------search------------------*/
