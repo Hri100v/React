@@ -39,8 +39,6 @@ export const Navbar = () => {
               {
                 MobileMenu ?
                   <i className="fa fa-times close home-btn"></i> :
-                  // <i className="fa fa-bars open"></i>
-                  // <FontAwesomeIcon icon="fa-solid fa-xmark" />
                   <i className="fa fa-solid fa-bars open"></i>
               }
             </button>
