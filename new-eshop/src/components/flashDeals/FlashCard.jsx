@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Slider from "react-slick";
+import { Like } from "../like/Like";
 
 const NextArrow = (props) => {
   const { onClick } = props;
@@ -28,22 +29,15 @@ const PrevArrow = (props) => {
 };
 
 export const FlashCard = ({ productItems, addToCard }) => {
-  const [count, setCount] = useState(0);
-  const increment = (prev) => {
-    // console.log(prev, 5115, prev += 1);
-    // setCount(count + 1);
-    setCount(prev => prev += 1);
-  };
-
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    // autoplay: true,
+    autoplay: true,
     nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />
+    prevArrow: <PrevArrow />,
   };
 
   return (
@@ -56,11 +50,7 @@ export const FlashCard = ({ productItems, addToCard }) => {
                 <div className="img">
                   <span className="discount">{productItem.discount}% Off</span>
                   <img src={productItem.cover} alt="" />
-                  <div className="product-like">
-                    <label>{count}</label>
-                    <br />
-                    <i className="fa-regular fa-heart" onClick={increment}></i>
-                  </div>
+                  <Like />
                 </div>
                 <div className="product-details">
                   <h3>{productItem.name}</h3>

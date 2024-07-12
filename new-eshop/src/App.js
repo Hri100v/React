@@ -5,20 +5,16 @@ import { Pages } from "./pages/Pages";
 import { Data } from "./components/Data";
 import { /*useDebugValue,*/ useState } from "react";
 import { Card } from "./common/card/Card";
+import Sdata from "./components/shop/Sdata";
+import { Footer } from "./common/footer/Footer";
 
 function App() {
   const { productItems } = Data;
+  const { shopItems } = Sdata;
   const [cardItem, setCardItem] = useState([]);
-  // useDebugValue("Hi");
-  // useDebugValue([productItems, 8118]);
   
   const addToCard = (product) => {
-    // console.log("-click-");
-    // console.log(product);
-
     const productExit = cardItem.find((item) => item.id === product.id);
-    // console.log("productExit", productExit);
-    
     if (productExit) {
       setCardItem(
         cardItem.map((item) =>
@@ -31,8 +27,6 @@ function App() {
       setCardItem([...cardItem, { ...product, qty: 1 }]);
     }
   };
-
-  // console.log("addToCard");
 
   const decreaseQty = (product) => {
     const productExit = cardItem.find((item) => item.id === product.id);
@@ -49,12 +43,13 @@ function App() {
         <Header cardItem={cardItem} />
         <Switch>
           <Route path="/" exact>
-            <Pages productItems={productItems} addToCard={addToCard} />
+            <Pages productItems={productItems} addToCard={addToCard} shopItems={shopItems} />
           </Route>
           <Route path="/card" exact>
             <Card cardItem={cardItem} addToCard={addToCard} decreaseQty={decreaseQty} />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </>
   );

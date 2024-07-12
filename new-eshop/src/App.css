@@ -298,7 +298,7 @@ button {
 .flag {
   width: 22px;
   height: auto;
-  border: 2px solid white;
+  /* border: 2px solid white;
   border-radius: 15%;
-  border-image: linear-gradient(to bottom, white, rgba(0, 0, 0, 0)) 1 100%;
+  border-image: linear-gradient(to bottom, white, rgba(0, 0, 0, 0)) 1 100%; */
 }

@@ -18,7 +18,7 @@ export const Head = () => {
             <span>
               <BG title="Bulgaria" className="flag" />
             </span>
-            <label htmlFor="">Bulgaria</label>
+            <label htmlFor="">BG</label>
             <span>
               <EU title="European Union" className="flag" />
             </span>
