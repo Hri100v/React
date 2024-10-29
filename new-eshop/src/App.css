@@ -109,15 +109,15 @@ button {
 }
 
 .category img {
-  width: 30px;
+  /* width: 30px;
   height: 30px;
   margin-top: 10px;
-  object-fit: contain;
+  object-fit: contain; */
 }
 
 .category span {
-  margin: 10px 20px;
-  text-transform: capitalize;
+  /* margin: 10px 20px;
+  text-transform: capitalize; */
 }
 
 .category .box {
@@ -133,7 +133,66 @@ button {
 .category .box:active {
   background-color: #dd6085;
 }
+
+.category .cat-items {
+  
+}
+
+.category .jqx-widget-content {
+  border-color: transparent;
+  font-size: 16px;
+}
+
+.category .jqx-tree-item-selected {
+  background-color: #fabfc9;
+  border-color: transparent;
+  color: white;
+  font-size: 16px;
+}
+
+.category .jqx-tree-item-hover {
+  background-color: #e98192;
+  border-color: transparent;
+  opacity: 0.7;
+  font-size: 16px;
+}
+
+.category .jqx-fill-state-hover {
+  background-color: #e94560;
+  border-color: transparent;
+  color: white;
+  font-size: 16px;
+}
+
+.category .jqx-tree-dropdown-root span {
+  border: 2px solid #fabfc9;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  font-size: 16px;
+}
+
+.category .jqx-tree-item-hover-material {
+  color: white !important;
+}
+
+.category .jqx-tree-item-material {
+  display: block !important;
+}
+
+/* .category li [role="treeitem"] {
+  border: 1px solid red;
+  color: red;
+}
+
+.category li[role="treeitem"]:has(div.jqx-fill-state-pressed) {
+  background: palevioletred;
+}
+
+.jqx-tree-item-arrow-expand {
+  background-color: red;
+} */
 /*------------------category------------------*/
+
 .btn-primary {
   width: 220px;
   background-color: #e94560;
