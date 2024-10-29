@@ -4,24 +4,28 @@ import "./style.css";
 export const Wrapper = () => {
   const data = [
     {
-      cover: <i class="fa-solid fa-truck-fast"></i>,
+      cover: <i className="fa-solid fa-truck-fast"></i>,
       title: "Worldwide Delivery",
       decs: "We offer competitive prices on our 100 million plus product any range.",
+      id: 10,
     },
     {
-      cover: <i class="fa-solid fa-id-card"></i>,
+      cover: <i className="fa-solid fa-id-card"></i>,
       title: "Safe Payment",
       decs: "We offer competitive prices on our 100 million plus product any range.",
+      id: 20,
     },
     {
-      cover: <i class="fa-solid fa-shield"></i>,
+      cover: <i className="fa-solid fa-shield"></i>,
       title: "Shop With Confidence ",
       decs: "We offer competitive prices on our 100 million plus product any range.",
+      id: 30,
     },
     {
-      cover: <i class="fa-solid fa-headset"></i>,
+      cover: <i className="fa-solid fa-headset"></i>,
       title: "24/7 Support ",
       decs: "We offer competitive prices on our 100 million plus product any range.",
+      id: 40,
     },
   ];
 
@@ -29,21 +33,17 @@ export const Wrapper = () => {
     <>
       <section className="wrapper background">
         <div className="container grid2">
-            {
-                data.map((value, index) => {
-                    return (
-                        <>
-                            <div className="product" key={index}>
-                                <div className="img icon-circle">
-                                    <i>{value.cover}</i>
-                                </div>
-                                <h3>{value.title}</h3>
-                                <p>{value.decs}</p>
-                            </div>
-                        </>
-                    )
-                })
-            }
+          {data.map((value, index) => {
+            return (
+              <div className="product" key={index}>
+                <div className="img icon-circle">
+                  <i>{value.cover}</i>
+                </div>
+                <h3>{value.title}</h3>
+                <p>{value.decs}</p>
+              </div>
+            );
+          })}
         </div>
       </section>
     </>

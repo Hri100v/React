@@ -18,17 +18,15 @@ export const Dcard = () => {
       <Slider {...settings}>
         {Ddata.map((value, index) => {
           return (
-            <>
-              <div className="product" key={index}>
-                <div className="box">
-                  <div className="img">
-                    <img src={value.cover} alt={value.name} />
-                  </div>
-                  <h4>{value.name}</h4>
-                  <span>{value.price}</span>
+            <div className="product" key={index}>
+              <div className="box">
+                <div className="img">
+                  <img src={value.cover} alt={value.name} />
                 </div>
+                <h4>{value.name}</h4>
+                <span>{value.price}</span>
               </div>
-            </>
+            </div>
           );
         })}
       </Slider>
