@@ -146,21 +146,43 @@ button {
 .category .jqx-tree-item-selected {
   background-color: #fabfc9;
   border-color: transparent;
-  color: white;
+  /* color: white; */
   font-size: 16px;
+  transition: 0.4s;
+}
+
+.category .jqx-tree-item-selected-material {
+  color: #e94560 !important;
 }
 
 .category .jqx-tree-item-hover {
-  background-color: #e98192;
+  background-color: #ffdee4;
   border-color: transparent;
-  opacity: 0.7;
+  /* opacity: 0.7; */
   font-size: 16px;
 }
 
+/* .category .jqx-tree-item-hover .jqx-tree-item-hover-material :has(.jqx-tree-item-selected-material) {
+  background-color: #dd6085;
+  color: #e94560 !important;
+} */
+
+/* .category.jqx-tree-item-selected-material.jqx-fill-state-pressed-material.jqx-tree-item-hover-material {
+  color: orangered !important;
+  background-color: yellow !important;
+} */
+
+.category .jqx-fill-state-pressed.jqx-fill-state-pressed-material.jqx-tree-item-selected.jqx-tree-item-selected-material.jqx-fill-state-hover.jqx-fill-state-hover-material.jqx-tree-item-hover.jqx-tree-item-hover-material
+{
+  background-color: #fabfc9;
+  color: #e94560;
+  /* all: none; */
+}
+
 .category .jqx-fill-state-hover {
-  background-color: #e94560;
+  /* background-color: #e94560; */
   border-color: transparent;
-  color: white;
+  /* color: white; */
   font-size: 16px;
 }
 
@@ -172,7 +194,7 @@ button {
 }
 
 .category .jqx-tree-item-hover-material {
-  color: white !important;
+  /* color: white !important; */
 }
 
 .category .jqx-tree-item-material {
@@ -191,6 +213,11 @@ button {
 .jqx-tree-item-arrow-expand {
   background-color: red;
 } */
+
+.category [id^="jqxScrollOuterWrappanelJqxTree"] {
+  /* background-color: red; */
+  visibility: hidden;
+}
 /*------------------category------------------*/
 
 .btn-primary {
