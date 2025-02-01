@@ -76,6 +76,48 @@ export const Categories = () => {
       label: "Inbox",
       selected: true,
     },
+    {
+      label: "New Store"
+    }
+  ];
+
+  const sourceData = [
+    {
+      label: "Fashion",
+      icon: "https://img.icons8.com/glyph-neue/64/26e07f/new.png",
+      expanded: true,
+      items: [
+        { label: "Brand New" }
+      ]
+    },
+    {
+      label: "Farming",
+      // icon: "https://img.icons8.com/glyph-neue/64/26e07f/new.png",
+      expanded: true,
+      items: [
+        { label: "Articles" },
+        { label: "Interviews" }
+      ]
+    },
+    {
+      label: "Tractors",
+      expanded: true,
+      items: [
+        { label: "Hobby-tractors", icon: "./images/category/categories-default.png" },
+        { label: "Small 20-40 hp", icon: "./images/category/categories-default.png" },
+        { label: "Multifunctional tractors", icon: "./images/category/categories-default.png" },
+        { label: "Heavy tractors", icon: "./images/category/categories-default.png" }
+      ]
+    },
+    {
+      label: "Mowers",
+      selected: true
+    },
+    { label: "Seeders" },
+    { label: "Tillers" },
+    { label: "Harvesters" },
+    // { label: "Mower" },
+    // { label: "Mower" }
   ];
 
   return (
@@ -98,7 +140,9 @@ export const Categories = () => {
           theme={"material"}
           width={"100%"}
           height={"100%"}
-          source={sourceData2}
+          // source={sourceData2}
+          source={sourceData}
+          toggleMode={"none"}
         />
       </div>
     </>
