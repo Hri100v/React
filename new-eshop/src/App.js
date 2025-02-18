@@ -1,6 +1,6 @@
 import "./App.css";
 import { Header } from "./common/header/Header";
-import { BrowserRouter as Router, /*Swi1tch,*/ Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, /*Switch,*/ Route, Routes } from "react-router-dom";
 import { Pages } from "./pages/Pages";
 import { Data } from "./components/Data";
 import { /*useDebugValue,*/ useState } from "react";
