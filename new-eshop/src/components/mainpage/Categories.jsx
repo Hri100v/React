@@ -7,79 +7,63 @@ import "jqwidgets-scripts/jqwidgets/styles/jqx.material.css";
 import JqxTree from "jqwidgets-scripts/jqwidgets-react-tsx/jqxtree";
 
 export const Categories = () => {
-  const data = [
-    // {
-    //   categoryImg: "./images/category/cat1.png",
-    //   categoryName: "Fashion",
-    // },
-    {
-      categoryImg: "./images/category/cat1.png",
-      categoryName: "Farming",
-      children: [
-        {
-          categoryImg: "./images/category/categories-default.png",
-          categoryName: "Sub-Tractors 1",
-        },
-        {
-          categoryImg: "./images/category/categories-default.png",
-          categoryName: "Sub-Tractors 2",
-        },
-      ],
-    },
-    {
-      categoryImg: "./images/category/categories-default.png",
-      categoryName: "Tractors",
-      children: [],
-    },
-    {
-      categoryImg: "./images/category/categories-default.png",
-      categoryName: "Mowers",
-      children: [],
-    },
-    {
-      categoryImg: "./images/category/categories-default.png",
-      categoryName: "Seeders",
-      children: [],
-    },
-    {
-      categoryImg: "./images/category/categories-default.png",
-      categoryName: "Tillers",
-    },
-    {
-      categoryImg: "./images/category/categories-default.png",
-      categoryName: "Harvesters",
-    },
-    {
-      categoryImg: "./images/category/categories-default.png",
-      categoryName: "Spare parts",
-      children: [
-        {
-          categoryImg: "./images/category/categories-default.png",
-          categoryName: "Sub-SpareParts 1",
-        },
-        {
-          categoryImg: "./images/category/categories-default.png",
-          categoryName: "Sub-SpareParts 2",
-        },
-      ],
-    },
-  ];
-
-  const sourceData2 = [
-    {
-      label: "Mail",
-      icon: "https://img.icons8.com/glyph-neue/64/26e07f/new.png",
-      expanded: true,
-      items: [{ label: "In-Mail" }],
-    },
-    {
-      label: "Inbox",
-      selected: true,
-    },
-    {
-      label: "New Store"
-    }
-  ];
+  // const data = [
+  //   // {
+  //   //   categoryImg: "./images/category/cat1.png",
+  //   //   categoryName: "Fashion",
+  //   // },
+  //   {
+  //     categoryImg: "./images/category/cat1.png",
+  //     categoryName: "Farming",
+  //     children: [
+  //       {
+  //         categoryImg: "./images/category/categories-default.png",
+  //         categoryName: "Sub-Tractors 1",
+  //       },
+  //       {
+  //         categoryImg: "./images/category/categories-default.png",
+  //         categoryName: "Sub-Tractors 2",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     categoryImg: "./images/category/categories-default.png",
+  //     categoryName: "Tractors",
+  //     children: [],
+  //   },
+  //   {
+  //     categoryImg: "./images/category/categories-default.png",
+  //     categoryName: "Mowers",
+  //     children: [],
+  //   },
+  //   {
+  //     categoryImg: "./images/category/categories-default.png",
+  //     categoryName: "Seeders",
+  //     children: [],
+  //   },
+  //   {
+  //     categoryImg: "./images/category/categories-default.png",
+  //     categoryName: "Tillers",
+  //   },
+  //   {
+  //     categoryImg: "./images/category/categories-default.png",
+  //     categoryName: "Harvesters",
+  //   },
+  //   {
+  //     categoryImg: "./images/category/categories-default.png",
+  //     categoryName: "Spare parts",
+  //     children: [
+  //       {
+  //         categoryImg: "./images/category/categories-default.png",
+  //         categoryName: "Sub-SpareParts 1",
+  //       },
+  //       {
+  //         categoryImg: "./images/category/categories-default.png",
+  //         categoryName: "Sub-SpareParts 2",
+  //       },
+  //     ],
+  //   },
+  // ];
 
   const sourceData = [
     {

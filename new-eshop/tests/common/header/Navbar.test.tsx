@@ -4,6 +4,10 @@ import { Navbar } from "../../../src/common/header/Navbar";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
 // import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
+// import { render, screen } from "@testing-library/react";
+// import { Navbar } from "../../../src/common/header/Navbar";
+// import { expect } from "@jest/globals";
 
 afterEach(cleanup);
 
@@ -39,14 +43,17 @@ describe("Navbar", () => {
       const homeLinks = screen.getAllByRole('link', { name: /home/i });
       // expect(homeLinks).toBeInTheDocument();
       expect(homeLinks.length).toBeGreaterThan(0);
+      // console.log(1001);
+      // console.log(homeLinks);
+      // console.log(homeLinks[0]);
+      
+      
+      
+      
+      expect(homeLinks[0]).toHaveAttribute('href', '/');
+      // expect()
       console.log(1001);
       console.log(homeLinks);
-      
-      
-      // expect(homeLinks[0]).toHaveAttribute('href', '/');
-  });
-
-  // it('should have a link to the shop page', () => {
   //     render(<Navbar />);
   //     const shopLink = screen.getByRole('link', { name: /shop/i });
   //     expect(shopLink).toBeInTheDocument();
