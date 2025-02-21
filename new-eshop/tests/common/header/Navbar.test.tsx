@@ -45,7 +45,6 @@ describe("Navbar", () => {
       expect(homeLinks.length).toBeGreaterThan(0);
       // console.log(1001);
       // console.log(homeLinks);
-      // console.log(2002);
       // console.log(homeLinks[0]);
       
       
@@ -53,9 +52,8 @@ describe("Navbar", () => {
       
       expect(homeLinks[0]).toHaveAttribute('href', '/');
       // expect()
-  });
-
-  // it('should have a link to the shop page', () => {
+      console.log(1001);
+      console.log(homeLinks);
   //     render(<Navbar />);
   //     const shopLink = screen.getByRole('link', { name: /shop/i });
   //     expect(shopLink).toBeInTheDocument();
