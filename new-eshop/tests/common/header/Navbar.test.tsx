@@ -34,31 +34,30 @@ describe("Navbar", () => {
   //     expect(logoElement).toBeInTheDocument();
   // });
 
-  it('should have a link to the home page', () => {
-      // render(<Navbar />);
-      render(<MemoryRouter>
+  it("should have a link to the home page", () => {
+    // render(<Navbar />);
+    render(
+      <MemoryRouter>
         <Navbar />
-      </MemoryRouter>);
-      // const homeLink = screen.getByRole('link', { name: /home/i });
-      const homeLinks = screen.getAllByRole('link', { name: /home/i });
-      // expect(homeLinks).toBeInTheDocument();
-      expect(homeLinks.length).toBeGreaterThan(0);
-      // console.log(1001);
-      // console.log(homeLinks);
-      // console.log(homeLinks[0]);
-      
-      
-      
-      
-      expect(homeLinks[0]).toHaveAttribute('href', '/');
-      // expect()
-      console.log(1001);
-      console.log(homeLinks);
-  //     render(<Navbar />);
-  //     const shopLink = screen.getByRole('link', { name: /shop/i });
-  //     expect(shopLink).toBeInTheDocument();
-  //     expect(shopLink).toHaveAttribute('href', '/shop');
-  // });
+      </MemoryRouter>
+    );
+    // const homeLink = screen.getByRole('link', { name: /home/i });
+    const homeLinks = screen.getAllByRole("link", { name: /home/i });
+    // expect(homeLinks).toBeInTheDocument();
+    expect(homeLinks.length).toBeGreaterThan(0);
+    // console.log(1001);
+    // console.log(homeLinks);
+    // console.log(homeLinks[0]);
+
+    expect(homeLinks[0]).toHaveAttribute("href", "/");
+    // expect()
+    // console.log(1001);
+    // console.log(homeLinks);
+    //     render(<Navbar />);
+    //     const shopLink = screen.getByRole('link', { name: /shop/i });
+    //     expect(shopLink).toBeInTheDocument();
+    //     expect(shopLink).toHaveAttribute('href', '/shop');
+  });
 
   // it('should have a link to the contact page', () => {
   //     render(<Navbar />);
