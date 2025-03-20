@@ -12,12 +12,17 @@ import "@testing-library/jest-dom/vitest";
 afterEach(cleanup);
 
 describe("Navbar", () => {
-  it("should render the Navbar component", () => {
-    // render(<Navbar />);
-    // const navbarElement = screen.getByRole("navigation");
-    // expect(navbarElement).toBeInTheDocument();
-    // screen.debug();
-  });
+  // it("should render the Navbar component", () => {
+  //   // render(<Navbar />);
+  //   render(
+  //     <MemoryRouter>
+  //       <Navbar />
+  //     </MemoryRouter>
+  //   );
+  //   const navbarElement = screen.getAllByRole("ul");
+  //   expect(navbarElement[0]).toBeInTheDocument();
+  //   // screen.debug();
+  // });
 
   it("should render 'Navbar'", () => {
     const { container } = render(
@@ -34,35 +39,39 @@ describe("Navbar", () => {
   //     expect(logoElement).toBeInTheDocument();
   // });
 
-  it("should have a link to the home page", () => {
-    // render(<Navbar />);
+  it("should have a link to the 'home' page", () => {
     render(
       <MemoryRouter>
         <Navbar />
       </MemoryRouter>
     );
-    // const homeLink = screen.getByRole('link', { name: /home/i });
-    const homeLinks = screen.getAllByRole("link", { name: /home/i });
-    // expect(homeLinks).toBeInTheDocument();
-    expect(homeLinks.length).toBeGreaterThan(0);
-    // console.log(1001);
-    // console.log(homeLinks);
-    // console.log(homeLinks[0]);
 
+    const homeLinks = screen.getAllByRole("link", { name: /home/i });
+    expect(homeLinks.length).toBeGreaterThan(0);
     expect(homeLinks[0]).toHaveAttribute("href", "/");
-    // expect()
-    // console.log(1001);
-    // console.log(homeLinks);
-    //     render(<Navbar />);
-    //     const shopLink = screen.getByRole('link', { name: /shop/i });
-    //     expect(shopLink).toBeInTheDocument();
-    //     expect(shopLink).toHaveAttribute('href', '/shop');
   });
 
-  // it('should have a link to the contact page', () => {
-  //     render(<Navbar />);
-  //     const contactLink = screen.getByRole('link', { name: /contact/i });
-  //     expect(contactLink).toBeInTheDocument();
-  //     expect(contactLink).toHaveAttribute('href', '/contact');
-  // });
+  it("should have a link to the 'contact' page", () => {
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
+
+    const contactLink = screen.getAllByRole("link", { name: /contact/i });
+    expect(contactLink.length).toBeGreaterThan(0);
+    expect(contactLink[0]).toHaveAttribute("href", "/contact");
+  });
+
+  it("should have a toggle button", () => {
+    render(
+      <MemoryRouter>
+        <Navbar />
+      </MemoryRouter>
+    );
+
+    const toggleButton = screen.getByRole("button");
+    expect(toggleButton).toBeInTheDocument();
+    expect(toggleButton).toHaveClass("toggle");
+  });
 });

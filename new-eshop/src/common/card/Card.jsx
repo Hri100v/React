@@ -11,7 +11,7 @@ export const Card = ({ cardItem, addToCard, decreaseQty }) => {
 
   return (
     <>
-      <section className="card-items">
+      <section role="card" className="card-items">
         <div className="container d_flex">
           <div className="card-details">
             {cardItem.length === 0 && (
@@ -65,7 +65,7 @@ export const Card = ({ cardItem, addToCard, decreaseQty }) => {
             <h2>Card Summary</h2>
             <div className="d_flex">
               <h4>Total Price:</h4>
-              <h3>${totalPrice}.00</h3>
+              <h3>${totalPrice || "0"}.00</h3>
             </div>
           </div>
         </div>
