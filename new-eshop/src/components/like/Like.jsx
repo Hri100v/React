@@ -10,7 +10,7 @@ export const Like = () => {
 
   return (
     <>
-      <div className="product-like">
+      <div role="like-button" className="product-like">
         <label>{count}</label>
         <br />
         <i className="fa-regular fa-heart" onClick={increment}></i>
