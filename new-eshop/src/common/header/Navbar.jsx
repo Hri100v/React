@@ -35,7 +35,7 @@ export const Navbar = () => {
                 <Link to="/contact">contact</Link>
               </li>
             </ul>
-            <button className="toggle" onClick={() => setMobileMenu(!MobileMenu)}>
+            <button className="toggle" id="mobile-menu" onClick={() => setMobileMenu(!MobileMenu)}>
               {
                 MobileMenu ?
                   <i className="fa fa-times close home-btn"></i> :

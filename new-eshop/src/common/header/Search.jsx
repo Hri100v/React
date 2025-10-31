@@ -6,8 +6,11 @@ import { Link } from "react-router-dom";
 export const Search = ({ cardItem }) => {
   window.addEventListener("scroll", () => {
     const search = document.querySelector(".search");
-    search.classList.toggle("active", window.scrollY > 100);
+    if (search) {
+      search.classList.toggle("active", window.scrollY > 100);
+    }
   });
+  
   return (
     <>
       <section className="search">
@@ -16,9 +19,17 @@ export const Search = ({ cardItem }) => {
             <img src={logo} alt="" style={{ width: 80, height: 80 }} />
           </div>
 
-          <div className="search-box f_flex">
+          <div role="search-item" className="search-box f_flex">
             <i className="fa fa-search"></i>
-            <input type="text" placeholder="Search and hit enter" />
+            <input type="text" placeholder="Search and hit enter" list="searchItems" />
+            {/* TODO: clear all - additional - start */}
+            <datalist id="searchItems">
+              {/* <option value="Item 1"></option>
+              <option value="Item 2"></option>
+              <option value="3">Item 3</option>
+              <option value="4">Item 4</option> */}
+            </datalist>
+            {/* additional - end */}
             <span>All Categories</span>
           </div>
 

@@ -65,7 +65,8 @@ export const Card = ({ cardItem, addToCard, decreaseQty }) => {
             <h2>Card Summary</h2>
             <div className="d_flex">
               <h4>Total Price:</h4>
-              <h3>${totalPrice || "0"}.00</h3>
+              {/* <h3>${totalPrice || "0"}.00</h3> */}
+              <h3>${totalPrice.toFixed(2) || "0"}</h3>
             </div>
           </div>
         </div>
