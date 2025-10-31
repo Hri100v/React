@@ -26,7 +26,7 @@ export const Footer = () => {
   return (
     <>
       <footer>
-        <div className="container grid2">
+        <div className=" footer container grid2">
           <div className="box">
             <h1>XSolid</h1>
             <p>
@@ -66,7 +66,7 @@ export const Footer = () => {
               <li>Corporate & Bulk Purchasing</li>
               <li>Returns & Refunds</li>
             </ul>
-          </div>
+        </div>
           <div className="box">
             <h2>Contact Us</h2>
             <ul>
