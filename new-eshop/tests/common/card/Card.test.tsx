@@ -119,6 +119,7 @@ describe("Card Component", () => {
     expect(cardElement).toHaveTextContent("Mulching mower");
   });
 
+<<<<<<< HEAD
   // it("should calculate correct 'Total Price' correctly - $0.00 when no item", () => {
   //   // // <Card cardItem={cardItem} addToCard={addToCard} decreaseQty={decreaseQty} />
   //   // const cardItem = [
@@ -140,6 +141,29 @@ describe("Card Component", () => {
   //   //     decreaseQty={decreaseQty}
   //   //   />
   //   // );
+=======
+  it("should calculate correct 'Total Price' correctly - $0.00 when no item", () => {
+    // <Card cardItem={cardItem} addToCard={addToCard} decreaseQty={decreaseQty} />
+    const cardItem = [
+      {
+        id: 2,
+        discount: 40,
+        cover: "./images/flash/flash-2.png",
+        name: "Mulching mower",
+        price: 900,
+        qty: 1
+      },
+    ];
+    const addToCard = () => {};
+    const decreaseQty = () => {};
+    render(
+      <Card
+        cardItem={cardItem}
+        addToCard={addToCard}
+        decreaseQty={decreaseQty}
+      />
+    );
+>>>>>>> master
 
   //   // screen.debug();
 
@@ -147,9 +171,15 @@ describe("Card Component", () => {
   //   //   return [];
   //   // };
 
+<<<<<<< HEAD
   //   // // function sum() {
   //   // //   return 1 + 1;
   //   // // }
+=======
+    // expect(cardElement).toBeInTheDocument();
+    expect(cardElement).toHaveTextContent("$900.00");
+  });
+>>>>>>> master
 
   //   // const cardElement = screen.getByRole("card");
   //   // // console.log(cardElement);
@@ -224,8 +254,21 @@ describe("Card Component", () => {
         cover: "./images/flash/flash-2.png",
         name: "Mulching mower",
         price: 900,
+<<<<<<< HEAD
         qty: 1
       },
+=======
+        qty: 2
+      },
+      {
+        id: 3,
+        discount: 40,
+        cover: "./images/flash/flash-3.png",
+        name: "Corn seeder",
+        price: 750,
+        qty: 1
+      }
+>>>>>>> master
     ];
 
   const decreaseQty = (product: cardItemType) => {
@@ -258,7 +301,18 @@ describe("Card Component", () => {
     );
     // screen.debug();
 
+<<<<<<< HEAD
     expect(screen.getByText("$0.00")).toBeInTheDocument();
+=======
+    // screen.debug();
+
+    const cardElement = screen.getByRole("card");
+    // console.log(cardElement);
+
+    // expect(cardElement).toBeInTheDocument();
+    // expect(cardElement).toHaveTextContent("$0.00");
+    expect(screen.getByText('$2550.00')).toBeInTheDocument();
+>>>>>>> master
   });
 
   // it("should show correct 'Total Price' - $0.00 when no item", () => {
