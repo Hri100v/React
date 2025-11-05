@@ -8,10 +8,14 @@
 /assets/images
 
 # testing
+tests/unit/coverage/
 /coverage
+coverage
+coverage/
 
 # production
 /build
+/build-base
 
 # misc
 .DS_Store
